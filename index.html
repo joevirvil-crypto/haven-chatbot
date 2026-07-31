@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base target="_top">
+    <title>Haven Knowledge Base</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #030712;
+            --bg-secondary: #0b1329;
+            --surface: rgba(15, 23, 42, 0.72);
+            --surface-hover: rgba(30, 41, 59, 0.85);
+            --surface-accent: rgba(59, 130, 246, 0.12);
+            
+            --primary: #3b82f6;
+            --primary-glow: #60a5fa;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-bright: #ffffff;
+            
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-glow: rgba(59, 130, 246, 0.4);
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 10px;
+            
+            --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(59, 130, 246, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        body {
+            min-height: 100vh;
+            position: relative;
+            background: #030712;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        /* ==========================================================
+           FULL-VIEWPORT MOVING ANIMATED BACKGROUND CONTAINER
+        ========================================================== */
+        .ai-bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0; /* Fixed stacking context so body doesn't hide canvas */
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 20%, #0d1e3d 0%, #030712 85%);
+        }
+
+        /* Dynamic Neural Network Interactive Canvas */
+        #aiCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            opacity: 0.95;
+            z-index: 1;
+        }
+
+        /* Perspective Moving Holographic Digital Grid Overlay */
+        .ai-grid-layer {
+            position: absolute;
+            inset: -50px;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.9), transparent 85%);
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.9), transparent 85%);
+            animation: gridPan 20s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes gridPan {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(25px) scale(1.02); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        /* Moving Volumetric Nebula Orbs */
+        .ai-nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.55;
+            mix-blend-mode: screen;
+            animation: floatNebula 16s infinite ease-in-out alternate;
+            z-index: 1;
+        }
+
+        .nebula-1 {
+            width: 650px;
+            height: 650px;
+            top: -150px;
+            left: -150px;
+            background: radial-gradient(circle, #3b82f6, rgba(6, 182, 212, 0.4) 70%, transparent);
+            animation-duration: 18s;
+        }
+
+        .nebula-2 {
+            width: 600px;
+            height: 600px;
+            bottom: -200px;
+            right: -150px;
+            background: radial-gradient(circle, #8b5cf6, rgba(236, 72, 153, 0.35) 70%, transparent);
+            animation-duration: 22s;
+        }
+
+        .nebula-3 {
+            width: 500px;
+            height: 500px;
+            top: 30%;
+            left: 50%;
+            background: radial-gradient(circle, #06b6d4, rgba(59, 130, 246, 0.3) 70%, transparent);
+            animation-duration: 15s;
+        }
+
+        @keyframes floatNebula {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(70px, 90px) scale(1.25); }
+            100% { transform: translate(-50px, -40px) scale(0.9); }
+        }
+
+        /* Continuous Ambient Scanline Beam Animation */
+        .scanline-effect {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 240, 255, 0.05) 51%,
+                transparent 51%
+            );
+            background-size: 100% 10px;
+            opacity: 0.8;
+            z-index: 3;
+        }
+
+        .light-sweep {
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 250px;
+            background: linear-gradient(
+                135deg,
+                transparent 0%,
+                rgba(6, 182, 212, 0.1) 50%,
+                transparent 100%
+            );
+            transform: rotate(-30deg);
+            animation: sweepLight 10s infinite linear;
+            z-index: 3;
+        }
+
+        @keyframes sweepLight {
+            0% { transform: translateY(0) rotate(-30deg); }
+            100% { transform: translateY(220vh) rotate(-30deg); }
+        }
+
+        .hero {
+            padding: 80px 7% 40px;
+            position: relative;
+            z-index: 10;
+            animation: heroFade 0.8s ease forwards;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-left {
+            flex: 1;
+        }
+
+        .logo {
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ffffff 0%, #a5f3fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo span {
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+            text-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            margin-bottom: 28px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            color: #93c5fd;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: pulseDot 1.8s infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.85); }
+        }
+
+        .badge:hover {
+            background: rgba(59, 130, 246, 0.22);
+            border-color: var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .hero-left h1 {
+            font-size: 60px;
+            line-height: 1.08;
+            font-weight: 800;
+            max-width: 680px;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .hero-left p {
+            max-width: 580px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .hero-right {
+            width: 520px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .hero-right-card {
+            position: relative;
+            border-radius: var(--radius-lg);
+            padding: 8px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(59, 130, 246, 0.25));
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(16px);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+            animation: heroFloat 6s ease-in-out infinite;
+        }
+
+        .hero-right-card img {
+            width: 100%;
+            height: auto;
+            border-radius: calc(var(--radius-lg) - 6px);
+            display: block;
+            object-fit: cover;
+        }
+
+        .hero-right-card::before {
+            content: "";
+            position: absolute;
+            inset: -3px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(45deg, var(--primary), var(--accent-cyan), var(--accent-purple));
+            z-index: -1;
+            opacity: 0.6;
+            filter: blur(15px);
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-right-card:hover {
+            transform: translateY(-10px) scale(1.02) rotate(0.5deg);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), 0 0 50px rgba(6, 182, 212, 0.35);
+        }
+
+        .hero-right-card:hover::before {
+            opacity: 1;
+            filter: blur(22px);
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+
+        .search-section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto 50px;
+            position: relative;
+            z-index: 10;
+            animation: heroFade 1s ease forwards;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 28px;
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--primary), var(--accent-purple));
+            transition: width 0.4s ease;
+        }
+
+        .search-container:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(15, 23, 42, 0.85);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.25);
+        }
+
+        .search-container:focus-within {
+            border-color: var(--primary-glow);
+            background: rgba(15, 23, 42, 0.92);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25), 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(6, 182, 212, 0.3);
+        }
+
+        .search-container:focus-within::after {
+            width: 100%;
+        }
+
+        .search-icon {
+            font-size: 22px;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.6));
+        }
+
+        #search {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text-bright);
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        #search::placeholder {
+            color: #64748b;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+            animation: heroFade 1.2s ease forwards;
+        }
+
+        .results-title {
+            margin-bottom: 24px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .results-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent);
+        }
+
+        #results {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .article-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: var(--radius-md);
+            padding: 26px 30px;
+            cursor: pointer;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: cardAppear 0.4s ease forwards;
+        }
+
+        .article-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.7s ease;
+        }
+
+        .article-card:hover::before {
+            left: 140%;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px) scale(1.008);
+            background: rgba(30, 41, 59, 0.82);
+            border-color: rgba(59, 130, 246, 0.45);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), 0 0 30px rgba(59, 130, 246, 0.22);
+        }
+
+        .article-card-badge {
+            display: inline-block;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .article-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-bright);
+            line-height: 1.3;
+        }
+
+        .article-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-card::after {
+            content: "→";
+            position: absolute;
+            right: 28px;
+            top: 28px;
+            font-size: 20px;
+            color: var(--primary-glow);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover::after {
+            opacity: 1;
+            transform: translateX(6px);
+            color: var(--accent-cyan);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-muted);
+            font-size: 17px;
+        }
+
+        .loading::before {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-cyan);
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 70px 20px;
+            color: var(--text-muted);
+            font-size: 17px;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: var(--radius-md);
+            border: 1px dashed rgba(255, 255, 255, 0.12);
+        }
+
+        .no-results::before {
+            content: "🔍";
+            display: block;
+            font-size: 48px;
+            margin-bottom: 14px;
+        }
+
+        /* Modal Dialog */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 40px 20px;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: #0f172a;
+            color: var(--text-main);
+            width: 100%;
+            max-width: 880px;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 50px rgba(59, 130, 246, 0.25);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #ffffff;
+        }
+
+        .modal-content h2 {
+            font-size: 28px;
+            font-weight: 700;
+            padding-right: 40px;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .modal-content hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 20px 0 24px;
+        }
+
+        #modalContent {
+            line-height: 1.8;
+            color: #cbd5e1;
+            font-size: 16px;
+        }
+
+        .pdf-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            margin-top: 14px;
+            border-radius: 14px;
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            transition: all 0.25s ease;
+            text-decoration: none;
+        }
+
+        .pdf-card:hover {
+            background: rgba(59, 130, 246, 0.18);
+            border-color: var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .pdf-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: #ef4444;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .pdf-info strong {
+            display: block;
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        .pdf-info small {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heroFade {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-left h1 {
+                font-size: 46px;
+                margin: 0 auto 20px;
+            }
+
+            .hero-left p {
+                margin: 0 auto;
+            }
+
+            .badge {
+                margin: 0 auto 24px;
+            }
+
+            .hero-right {
+                width: 100%;
+                max-width: 480px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 50px 5% 30px;
+            }
+
+            .logo {
+                font-size: 42px;
+            }
+
+            .hero-left h1 {
+                font-size: 34px;
+            }
+
+            .search-container {
+                padding: 14px 20px;
+            }
+
+            #search {
+                font-size: 16px;
+            }
+
+            .modal-content {
+                padding: 24px;
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<!-- 
+  Add this widget to your existing index.html file before the closing </body> tag.
+  Includes full styling, responsiveness, floating toggle, message history, and server call logic.
+-->
+
+<!-- FontAwesome for Chat Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Tailwind CSS (Include if not already in your index.html) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+
+<!-- Floating Chat Button Trigger -->
+<div id="ai-chat-launcher" class="fixed bottom-6 right-6 z-50">
+  <button id="chat-toggle-btn" onclick="toggleKbChat()" class="flex items-center justify-center w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none">
+    <i id="chat-icon-open" class="fas fa-comments text-2xl"></i>
+    <i id="chat-icon-close" class="fas fa-times text-2xl hidden"></i>
+  </button>
+</div>
+
+<!-- AI Chat Drawer Window -->
+<div id="ai-chat-window" class="fixed bottom-24 right-6 w-96 max-w-[calc(100vw-2rem)] h-[520px] max-h-[80vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl z-50 hidden flex-col overflow-hidden transition-all duration-300 font-sans">
+  
+  <!-- Chat Header -->
+  <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-3 flex items-center justify-between shadow-sm">
+    <div class="flex items-center space-x-3">
+      <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white">
+        <i class="fas fa-robot text-lg"></i>
+      </div>
+      <div>
+        <h3 class="font-semibold text-sm leading-tight">Knowledge Assistant</h3>
+        <p class="text-xs text-blue-100 flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+          Connected to Sheet Data
+        </p>
+      </div>
+    </div>
+    <button onclick="toggleKbChat()" class="text-white/80 hover:text-white text-lg p-1 transition-colors">
+      <i class="fas fa-minus"></i>
+    </button>
+  </div>
+
+
+  <!-- Chat Messages Container -->
+  <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50 dark:bg-slate-950 text-sm">
+    <!-- Welcome Message -->
+    <div class="flex items-start gap-2.5">
+      <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-3 rounded-2xl rounded-tl-none shadow-sm text-slate-800 dark:text-slate-100 max-w-[85%] leading-relaxed">
+        Hello! 👋 I'm Ava, your Knowledge Base Assistant!
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Chat Input Footer -->
+  <div class="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+    <form id="chat-form" onsubmit="handleKbChatSubmit(event)" class="flex items-center gap-2">
+      <input 
+        type="text" 
+        id="chat-user-input" 
+        placeholder="Ask a question..." 
+        autocomplete="off"
+        class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 placeholder-slate-400 border border-slate-200 dark:border-slate-700 text-sm rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+      />
+      <button 
+        type="submit" 
+        id="chat-send-btn"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2.5 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+      >
+        <i class="fas fa-paper-plane text-sm"></i>
+      </button>
+    </form>
+    <div class="text-[10px] text-slate-400 dark:text-slate-500 text-center mt-2">
+      Answers powered by Google Gemini based on Knowledge Base sheet
+    </div>
+  </div>
+</div>
+
+
+<script>
+  /**
+   * Toggles the visibility of the Chat Assistant Drawer window
+   */
+  function toggleKbChat() {
+    const chatWindow = document.getElementById('ai-chat-window');
+    const openIcon = document.getElementById('chat-icon-open');
+    const closeIcon = document.getElementById('chat-icon-close');
+    const isHidden = chatWindow.classList.contains('hidden');
+
+    if (isHidden) {
+      chatWindow.classList.remove('hidden');
+      chatWindow.classList.add('flex');
+      openIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+      document.getElementById('chat-user-input').focus();
+    } else {
+      chatWindow.classList.add('hidden');
+      chatWindow.classList.remove('flex');
+      openIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+    }
+  }
+
+  /**
+   * Handles Form Submission and Calls Backend Google Apps Script function
+   */
+  function handleKbChatSubmit(e) {
+    e.preventDefault();
+    const inputEl = document.getElementById('chat-user-input');
+    const question = inputEl.value.trim();
+
+    if (!question) return;
+
+    // Append user message bubble
+    appendChatMessage('user', question);
+    inputEl.value = '';
+
+    // Disable input and button while loading
+    setChatLoading(true);
+
+    // Append typing indicator bubble
+    const loadingId = appendTypingIndicator();
+
+    // Call server-side function in Code.gs
+    if (typeof google !== 'undefined' && google.script && google.script.run) {
+      google.script.run
+        .withSuccessHandler(function(response) {
+          removeTypingIndicator(loadingId);
+          appendChatMessage('bot', response);
+          setChatLoading(false);
+        })
+        .withFailureHandler(function(error) {
+          removeTypingIndicator(loadingId);
+          appendChatMessage('bot', 'Error contacting server: ' + error.message);
+          setChatLoading(false);
+        })
+        .askKnowledgeBaseAI(question);
+    } else {
+      // Mock fallback for testing outside Google Apps Script web app preview
+      setTimeout(function() {
+        removeTypingIndicator(loadingId);
+        appendChatMessage('bot', 'Demo Mode: Running outside Google Apps Script environment. Please deploy as a Web App to query your Google Sheet.');
+        setChatLoading(false);
+      }, 1000);
+    }
+  }
+
+  /**
+   * Appends a chat bubble to the chat container
+   */
+  function appendChatMessage(sender, text) {
+    const container = document.getElementById('chat-messages');
+    const msgDiv = document.createElement('div');
+    
+    // Format basic line breaks and bolding markdown
+    const formattedText = escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    if (sender === 'user') {
+      msgDiv.className = 'flex items-start justify-end gap-2.5';
+      msgDiv.innerHTML = `
+        <div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%] leading-relaxed">
+          ${formattedText}
+        </div>
+      `;
+    } else {
+      msgDiv.className = 'flex items-start gap-2.5';
+      msgDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs mt-0.5">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-3 rounded-2xl rounded-tl-none shadow-sm text-slate-800 dark:text-slate-100 max-w-[85%] leading-relaxed">
+          ${formattedText}
+        </div>
+      `;
+    }
+
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  /**
+   * Displays animated typing indicator dots
+   */
+  function appendTypingIndicator() {
+    const container = document.getElementById('chat-messages');
+    const id = 'typing-' + Date.now();
+    const typingDiv = document.createElement('div');
+    typingDiv.id = id;
+    typingDiv.className = 'flex items-start gap-2.5';
+    typingDiv.innerHTML = `
+      <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm text-slate-400 flex items-center gap-1.5">
+        <span class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+        <span class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+        <span class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+      </div>
+    `;
+    container.appendChild(typingDiv);
+    container.scrollTop = container.scrollHeight;
+    return id;
+  }
+
+  function removeTypingIndicator(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  function setChatLoading(isLoading) {
+    const input = document.getElementById('chat-user-input');
+    const button = document.getElementById('chat-send-btn');
+    input.disabled = isLoading;
+    button.disabled = isLoading;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  }
+</script>
+<body>
+
+<div class="ai-bg-container">
+    <canvas id="aiCanvas"></canvas>
+    <div class="ai-grid-layer"></div>
+    <div class="ai-nebula nebula-1"></div>
+    <div class="ai-nebula nebula-2"></div>
+    <div class="ai-nebula nebula-3"></div>
+    <div class="scanline-effect"></div>
+    <div class="light-sweep"></div>
+</div>
+
+<header class="hero">
+    <div class="hero-container">
+        <div class="hero-left">
+            <div class="logo">
+                <span>[</span>haven<span>]</span>
+            </div>
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Helpdesk Knowledge Base
+            </div>
+            <h1>
+                Search HavenSafety Knowledge Instantly
+            </h1>
+            <p>
+                Find troubleshooting guides, Root Cause Analysis, Incident Timeline documentation, AI investigation features, workflows, and support articles in real time.
+            </p>
+        </div>
+
+        <div class="hero-right">
+            <div class="hero-right-card">
+                <img src="https://framerusercontent.com/images/3uw0rz0msPWtcFCon0uCOW8U.jpg?width=1200" 
+                     alt="Haven AI Interface" 
+                     onerror="this.src='https://placehold.co/600x400/0f172a/3b82f6?text=Haven+AI+Knowledge+Base'"
+                     loading="lazy">
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="search-section">
+    <div class="search-container">
+        <div class="search-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </div>
+        <input id="search" 
+               type="text" 
+               autocomplete="off" 
+               placeholder="Search articles, RCA, Timeline, AI, Investigation...">
+    </div>
+</section>
+
+<main>
+    <div class="results-title">
+        Knowledge Articles
+    </div>
+    <div id="results">
+        <!-- Dynamic query cards populate here -->
+    </div>
+</main>
+
+<div id="articleModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeArticle()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <hr>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script>
+function startAiCanvas() {
+    const canvas = document.getElementById("aiCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    let width, height;
+    let particles = [];
+    let matrixDust = [];
+    let pulses = [];
+    let shockwaves = [];
+    let mouse = { x: null, y: null, radius: 220 };
+
+    function resize() {
+        width = canvas.width = window.innerWidth || document.documentElement.clientWidth;
+        height = canvas.height = window.innerHeight || document.documentElement.clientHeight;
+        createParticles();
+    }
+
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    window.addEventListener("mouseleave", () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    window.addEventListener("click", (e) => {
+        shockwaves.push(new Shockwave(e.clientX, e.clientY));
+    });
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 1.2;
+            this.vy = (Math.random() - 0.5) * 1.2;
+            this.radius = Math.random() * 2.8 + 1.8;
+            this.color = Math.random() > 0.4 ? "#00f0ff" : (Math.random() > 0.5 ? "#3b82f6" : "#a855f7");
+            this.baseAlpha = Math.random() * 0.5 + 0.5;
+            this.alpha = this.baseAlpha;
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x < 0 || this.x > width) this.vx *= -1;
+            if (this.y < 0 || this.y > height) this.vy *= -1;
+
+            this.alpha = this.baseAlpha + Math.sin(Date.now() * 0.003 + this.x) * 0.25;
+
+            if (mouse.x !== null) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < mouse.radius) {
+                    const force = (mouse.radius - dist) / mouse.radius;
+                    this.x -= (dx / dist) * force * 3;
+                    this.y -= (dy / dist) * force * 3;
+                }
+            }
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 16;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    class Dust {
+        constructor() {
+            this.reset();
+            this.y = Math.random() * height;
+        }
+
+        reset() {
+            this.x = Math.random() * width;
+            this.y = height + 10;
+            this.vy = -(Math.random() * 1.2 + 0.4);
+            this.size = Math.random() * 2 + 0.8;
+            this.alpha = Math.random() * 0.7 + 0.3;
+            this.color = Math.random() > 0.5 ? "#00f0ff" : "#c084fc";
+        }
+
+        update() {
+            this.y += this.vy;
+            if (this.y < -10) this.reset();
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.alpha;
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    class Pulse {
+        constructor(p1, p2) {
+            this.p1 = p1;
+            this.p2 = p2;
+            this.progress = 0;
+            this.speed = Math.random() * 0.03 + 0.015;
+            this.color = Math.random() > 0.5 ? "#ffffff" : "#00f0ff";
+        }
+
+        update() {
+            this.progress += this.speed;
+        }
+
+        draw() {
+            if (this.progress > 1) return;
+            const x = this.p1.x + (this.p2.x - this.p1.x) * this.progress;
+            const y = this.p1.y + (this.p2.y - this.p1.y) * this.progress;
+
+            ctx.beginPath();
+            ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 18;
+            ctx.globalAlpha = 1;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    class Shockwave {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.radius = 5;
+            this.maxRadius = 180;
+            this.alpha = 0.9;
+            this.speed = 5;
+        }
+
+        update() {
+            this.radius += this.speed;
+            this.alpha -= 0.025;
+        }
+
+        draw() {
+            if (this.alpha <= 0) return;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = "#00f0ff";
+            ctx.lineWidth = 2.5;
+            ctx.shadowColor = "#00f0ff";
+            ctx.shadowBlur = 20;
+            ctx.globalAlpha = Math.max(0, this.alpha);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    function createParticles() {
+        particles = [];
+        matrixDust = [];
+        const count = Math.floor((width * height) / 11000);
+        for (let i = 0; i < count; i++) {
+            particles.push(new Particle());
+        }
+        for (let i = 0; i < 50; i++) {
+            matrixDust.push(new Dust());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < matrixDust.length; i++) {
+            matrixDust[i].update();
+            matrixDust[i].draw();
+        }
+
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    const alpha = (1 - dist / 150) * 0.45;
+                    ctx.strokeStyle = "#00f0ff";
+                    ctx.globalAlpha = alpha;
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+
+                    if (Math.random() < 0.0006) {
+                        pulses.push(new Pulse(particles[i], particles[j]));
+                    }
+                }
+            }
+        }
+
+        for (let i = pulses.length - 1; i >= 0; i--) {
+            pulses[i].update();
+            pulses[i].draw();
+            if (pulses[i].progress >= 1) {
+                pulses.splice(i, 1);
+            }
+        }
+
+        for (let i = shockwaves.length - 1; i >= 0; i--) {
+            shockwaves[i].update();
+            shockwaves[i].draw();
+            if (shockwaves[i].alpha <= 0) {
+                shockwaves.splice(i, 1);
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    resize();
+    animate();
+}
+
+if (document.readyState === "complete" || document.readyState === "interactive") {
+    startAiCanvas();
+} else {
+    document.addEventListener("DOMContentLoaded", startAiCanvas);
+}
+window.addEventListener("load", startAiCanvas);
+
+const mockKnowledgeBase = [
+    {
+        id: 1,
+        articleId: "KB-AI-101",
+        topic: "AI Incident Investigation & Root Cause Analysis Workflow",
+        updated: "2026-07-20",
+        content: "This guide outlines the complete workflow for conducting automated AI Root Cause Analysis (RCA) on critical infrastructure incidents. Learn how Haven AI correlates telemetry, log streams, and system state snapshots to determine primary fault factors.",
+        pdfs: [{ url: "#", title: "AI_RCA_Standard_Operating_Procedure.pdf" }]
+    },
+    {
+        id: 2,
+        articleId: "KB-TIMELINE-204",
+        topic: "Incident Timeline Synthesis & Forensic Logging",
+        updated: "2026-07-15",
+        content: "Detailed documentation on how Haven automatically synthesizes chronologically ordered event timelines from multi-region cloud services during live outage escalations.",
+        pdfs: []
+    },
+    {
+        id: 3,
+        articleId: "KB-SAFETY-309",
+        topic: "HavenSafety Emergency Protocols & System Recovery",
+        updated: "2026-07-02",
+        content: "Step-by-step failover procedures and safety override controls when executing automated mitigation routines across protected edge nodes.",
+        pdfs: [{ url: "#", title: "HavenSafety_Failover_Guide.pdf" }]
+    }
+];
+
+const searchBox = document.getElementById("search");
+
+searchBox.addEventListener("keyup", function () {
+    let keyword = searchBox.value.trim();
+
+    if (keyword === "") {
+        document.getElementById("results").innerHTML = "";
+        return;
+    }
+
+    document.getElementById("results").innerHTML = `
+        <div class="loading">
+            Searching AI knowledge neural network...
+        </div>
+    `;
+
+    // Check if running inside Google Apps Script environment
+    if (typeof google !== "undefined" && google.script && google.script.run) {
+        google.script.run
+            .withSuccessHandler(renderResults)
+            .withFailureHandler(handleSearchError)
+            .searchKnowledge(keyword);
+    } else {
+        // Standalone preview fallback simulation
+        setTimeout(() => {
+            const filtered = mockKnowledgeBase.filter(item => 
+                item.topic.toLowerCase().includes(keyword.toLowerCase()) || 
+                item.content.toLowerCase().includes(keyword.toLowerCase()) ||
+                item.articleId.toLowerCase().includes(keyword.toLowerCase())
+            );
+            renderResults(filtered);
+        }, 280);
+    }
+});
+
+function renderResults(results) {
+    let html = "";
+
+    if (!results || results.length === 0) {
+        html = `
+            <div class="no-results">
+                No matching articles found in Haven Knowledge Base.
+            </div>
+        `;
+    } else {
+        results.forEach(function (article) {
+            html += `
+                <div class="article-card" onclick="showArticle(${article.id})">
+                    <div class="article-card-badge">
+                        ${article.articleId || 'KB-ARTICLE'}
+                    </div>
+                    <h3>${article.topic}</h3>
+                    <p>${article.content || article.snippet || ''}</p>
+                </div>
+            `;
+        });
+    }
+
+    document.getElementById("results").innerHTML = html;
+}
+
+function handleSearchError(error) {
+    document.getElementById("results").innerHTML = `
+        <div class="no-results">
+            Error retrieving knowledge results. Please try again.
+        </div>
+    `;
+    console.error("Search Error:", error);
+}
+
+function showArticle(id) {
+    if (typeof google !== "undefined" && google.script && google.script.run) {
+        google.script.run
+            .withSuccessHandler(displayModalArticle)
+            .getArticle(id);
+    } else {
+        // Standalone preview fallback
+        const found = mockKnowledgeBase.find(a => a.id === id);
+        displayModalArticle(found);
+    }
+}
+
+function displayModalArticle(article) {
+    if (!article) return;
+
+    document.getElementById("modalTitle").innerText = article.topic;
+
+    let pdfSection = "";
+
+    if (article.pdfs && article.pdfs.length > 0) {
+        pdfSection = `
+            <hr>
+            <h3 style="font-size: 16px; margin-bottom: 12px; color: #fff;">📄 Attachment Documents</h3>
+        `;
+
+        article.pdfs.forEach(function(pdf, index) {
+            pdfSection += `
+                <a href="${pdf.url}" target="_blank" class="pdf-card">
+                    <div class="pdf-icon">📄</div>
+                    <div class="pdf-info">
+                        <strong>${pdf.title || 'PDF Document ' + (index + 1)}</strong>
+                        <small>Click to open document in new tab</small>
+                    </div>
+                </a>
+            `;
+        });
+    }
+
+    document.getElementById("modalContent").innerHTML = `
+        <div style="margin-bottom: 12px;">
+            <span class="article-card-badge">${article.articleId || 'KB-ARTICLE'}</span>
+            <span style="font-size: 13px; color: var(--text-muted); margin-left: 10px;">
+                Last Updated: ${article.updated || "N/A"}
+            </span>
+        </div>
+
+        <div style="white-space: pre-wrap; line-height: 1.8;">
+            ${article.content}
+        </div>
+
+        ${pdfSection}
+    `;
+
+    document.getElementById("articleModal").style.display = "block";
+}
+
+function closeArticle() {
+    document.getElementById("articleModal").style.display = "none";
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById("articleModal");
+    if (event.target === modal) {
+        closeArticle();
+    }
+};
+</script>
+
+</body>
+</html>
