@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base target="_top">
+    <title>Haven Knowledge Base</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+</head>
+<!-- 
+  Add this widget to your existing index.html file before the closing </body> tag.
+  Includes full styling, responsiveness, floating toggle, message history, and server call logic.
+-->
+
+<!-- FontAwesome for Chat Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Tailwind CSS (Include if not already in your index.html) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+
+<!-- Floating Chat Button Trigger -->
+<div id="ai-chat-launcher" class="fixed bottom-6 right-6 z-50">
+  <button id="chat-toggle-btn" onclick="toggleKbChat()" class="flex items-center justify-center w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none">
+    <i id="chat-icon-open" class="fas fa-comments text-2xl"></i>
+    <i id="chat-icon-close" class="fas fa-times text-2xl hidden"></i>
+  </button>
+</div>
+
+<!-- AI Chat Drawer Window -->
+<div id="ai-chat-window" class="fixed bottom-24 right-6 w-96 max-w-[calc(100vw-2rem)] h-[520px] max-h-[80vh] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl z-50 hidden flex-col overflow-hidden transition-all duration-300 font-sans">
+  
+  <!-- Chat Header -->
+  <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-3 flex items-center justify-between shadow-sm">
+    <div class="flex items-center space-x-3">
+      <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white">
+        <i class="fas fa-robot text-lg"></i>
+      </div>
+      <div>
+        <h3 class="font-semibold text-sm leading-tight">Knowledge Assistant</h3>
+        <p class="text-xs text-blue-100 flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+          Connected to Sheet Data
+        </p>
+      </div>
+    </div>
+    <button onclick="toggleKbChat()" class="text-white/80 hover:text-white text-lg p-1 transition-colors">
+      <i class="fas fa-minus"></i>
+    </button>
+  </div>
+
+
+  <!-- Chat Messages Container -->
+  <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50 dark:bg-slate-950 text-sm">
+    <!-- Welcome Message -->
+    <div class="flex items-start gap-2.5">
+      <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-3 rounded-2xl rounded-tl-none shadow-sm text-slate-800 dark:text-slate-100 max-w-[85%] leading-relaxed">
+        Hello! 👋 I'm Ava, your Knowledge Base Assistant!
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Chat Input Footer -->
+  <div class="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+    <form id="chat-form" onsubmit="handleKbChatSubmit(event)" class="flex items-center gap-2">
+      <input 
+        type="text" 
+        id="chat-user-input" 
+        placeholder="Ask a question..." 
+        autocomplete="off"
+        class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 placeholder-slate-400 border border-slate-200 dark:border-slate-700 text-sm rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+      />
+      <button 
+        type="submit" 
+        id="chat-send-btn"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2.5 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+      >
+        <i class="fas fa-paper-plane text-sm"></i>
+      </button>
+    </form>
+    <div class="text-[10px] text-slate-400 dark:text-slate-500 text-center mt-2">
+      Answers powered by Google Gemini based on Knowledge Base sheet
+    </div>
+  </div>
+</div>
+
+
+<script>
+  /**
+   * Toggles the visibility of the Chat Assistant Drawer window
+   */
+  function toggleKbChat() {
+    const chatWindow = document.getElementById('ai-chat-window');
+    const openIcon = document.getElementById('chat-icon-open');
+    const closeIcon = document.getElementById('chat-icon-close');
+    const isHidden = chatWindow.classList.contains('hidden');
+
+    if (isHidden) {
+      chatWindow.classList.remove('hidden');
+      chatWindow.classList.add('flex');
+      openIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+      document.getElementById('chat-user-input').focus();
+    } else {
+      chatWindow.classList.add('hidden');
+      chatWindow.classList.remove('flex');
+      openIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+    }
+  }
+
+  /**
+   * Handles Form Submission and Calls Backend Google Apps Script function
+   */
+  function handleKbChatSubmit(e) {
+    e.preventDefault();
+    const inputEl = document.getElementById('chat-user-input');
+    const question = inputEl.value.trim();
+
+    if (!question) return;
+
+    // Append user message bubble
+    appendChatMessage('user', question);
+    inputEl.value = '';
+
+    // Disable input and button while loading
+    setChatLoading(true);
+
+    // Append typing indicator bubble
+    const loadingId = appendTypingIndicator();
+
+    // Call server-side function in Code.gs
+    if (typeof google !== 'undefined' && google.script && google.script.run) {
+      google.script.run
+        .withSuccessHandler(function(response) {
+          removeTypingIndicator(loadingId);
+          appendChatMessage('bot', response);
+          setChatLoading(false);
+        })
+        .withFailureHandler(function(error) {
+          removeTypingIndicator(loadingId);
+          appendChatMessage('bot', 'Error contacting server: ' + error.message);
+          setChatLoading(false);
+        })
+        .askKnowledgeBaseAI(question);
+    } else {
+      // Mock fallback for testing outside Google Apps Script web app preview
+      setTimeout(function() {
+        removeTypingIndicator(loadingId);
+        appendChatMessage('bot', 'Demo Mode: Running outside Google Apps Script environment. Please deploy as a Web App to query your Google Sheet.');
+        setChatLoading(false);
+      }, 1000);
+    }
+  }
+
+  /**
+   * Appends a chat bubble to the chat container
+   */
+  function appendChatMessage(sender, text) {
+    const container = document.getElementById('chat-messages');
+    const msgDiv = document.createElement('div');
+    
+    // Format basic line breaks and bolding markdown
+    const formattedText = escapeHtml(text)
+      .replace(/\n/g, '<br>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    if (sender === 'user') {
+      msgDiv.className = 'flex items-start justify-end gap-2.5';
+      msgDiv.innerHTML = `
+        <div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm max-w-[85%] leading-relaxed">
+          ${formattedText}
+        </div>
+      `;
+    } else {
+      msgDiv.className = 'flex items-start gap-2.5';
+      msgDiv.innerHTML = `
+        <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs mt-0.5">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-3 rounded-2xl rounded-tl-none shadow-sm text-slate-800 dark:text-slate-100 max-w-[85%] leading-relaxed">
+          ${formattedText}
+        </div>
+      `;
+    }
+
+    container.appendChild(msgDiv);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  /**
+   * Displays animated typing indicator dots
+   */
+  function appendTypingIndicator() {
+    const container = document.getElementById('chat-messages');
+    const id = 'typing-' + Date.now();
+    const typingDiv = document.createElement('div');
+    typingDiv.id = id;
+    typingDiv.className = 'flex items-start gap-2.5';
+    typingDiv.innerHTML = `
+      <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-3 rounded-2xl rounded-tl-none shadow-sm text-slate-400 flex items-center gap-1.5">
+        <span class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+        <span class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+        <span class="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+      </div>
+    `;
+    container.appendChild(typingDiv);
+    container.scrollTop = container.scrollHeight;
+    return id;
+  }
+
+  function removeTypingIndicator(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+  function setChatLoading(isLoading) {
+    const input = document.getElementById('chat-user-input');
+    const button = document.getElementById('chat-send-btn');
+    input.disabled = isLoading;
+    button.disabled = isLoading;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  }
+</script>
+<body>
+
+<div class="ai-bg-container">
+    <canvas id="aiCanvas"></canvas>
+    <div class="ai-grid-layer"></div>
+    <div class="ai-nebula nebula-1"></div>
+    <div class="ai-nebula nebula-2"></div>
+    <div class="ai-nebula nebula-3"></div>
+    <div class="scanline-effect"></div>
+    <div class="light-sweep"></div>
+</div>
+
+<header class="hero">
+    <div class="hero-container">
+        <div class="hero-left">
+            <div class="logo">
+                <span>[</span>haven<span>]</span>
+            </div>
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Helpdesk Knowledge Base
+            </div>
+            <h1>
+                Search HavenSafety Knowledge Instantly
+            </h1>
+            <p>
+                Find troubleshooting guides, Root Cause Analysis, Incident Timeline documentation, AI investigation features, workflows, and support articles in real time.
+            </p>
+        </div>
+
+        <div class="hero-right">
+            <div class="hero-right-card">
+                <img src="https://framerusercontent.com/images/3uw0rz0msPWtcFCon0uCOW8U.jpg?width=1200" 
+                     alt="Haven AI Interface" 
+                     onerror="this.src='https://placehold.co/600x400/0f172a/3b82f6?text=Haven+AI+Knowledge+Base'"
+                     loading="lazy">
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="search-section">
+    <div class="search-container">
+        <div class="search-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </div>
+        <input id="search" 
+               type="text" 
+               autocomplete="off" 
+               placeholder="Search articles, RCA, Timeline, AI, Investigation...">
+    </div>
+</section>
+
+<main>
+    <div class="results-title">
+        Knowledge Articles
+    </div>
+    <div id="results">
+        <!-- Dynamic query cards populate here -->
+    </div>
+</main>
+
+<div id="articleModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeArticle()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <hr>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script>
+function startAiCanvas() {
+    const canvas = document.getElementById("aiCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    let width, height;
+    let particles = [];
+    let matrixDust = [];
+    let pulses = [];
+    let shockwaves = [];
+    let mouse = { x: null, y: null, radius: 220 };
+
+    function resize() {
+        width = canvas.width = window.innerWidth || document.documentElement.clientWidth;
+        height = canvas.height = window.innerHeight || document.documentElement.clientHeight;
+        createParticles();
+    }
+
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+    });
+
+    window.addEventListener("mouseleave", () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    window.addEventListener("click", (e) => {
+        shockwaves.push(new Shockwave(e.clientX, e.clientY));
+    });
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 1.2;
+            this.vy = (Math.random() - 0.5) * 1.2;
+            this.radius = Math.random() * 2.8 + 1.8;
+            this.color = Math.random() > 0.4 ? "#00f0ff" : (Math.random() > 0.5 ? "#3b82f6" : "#a855f7");
+            this.baseAlpha = Math.random() * 0.5 + 0.5;
+            this.alpha = this.baseAlpha;
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x < 0 || this.x > width) this.vx *= -1;
+            if (this.y < 0 || this.y > height) this.vy *= -1;
+
+            this.alpha = this.baseAlpha + Math.sin(Date.now() * 0.003 + this.x) * 0.25;
+
+            if (mouse.x !== null) {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < mouse.radius) {
+                    const force = (mouse.radius - dist) / mouse.radius;
+                    this.x -= (dx / dist) * force * 3;
+                    this.y -= (dy / dist) * force * 3;
+                }
+            }
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = Math.max(0, Math.min(1, this.alpha));
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 16;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    class Dust {
+        constructor() {
+            this.reset();
+            this.y = Math.random() * height;
+        }
+
+        reset() {
+            this.x = Math.random() * width;
+            this.y = height + 10;
+            this.vy = -(Math.random() * 1.2 + 0.4);
+            this.size = Math.random() * 2 + 0.8;
+            this.alpha = Math.random() * 0.7 + 0.3;
+            this.color = Math.random() > 0.5 ? "#00f0ff" : "#c084fc";
+        }
+
+        update() {
+            this.y += this.vy;
+            if (this.y < -10) this.reset();
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.alpha;
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    class Pulse {
+        constructor(p1, p2) {
+            this.p1 = p1;
+            this.p2 = p2;
+            this.progress = 0;
+            this.speed = Math.random() * 0.03 + 0.015;
+            this.color = Math.random() > 0.5 ? "#ffffff" : "#00f0ff";
+        }
+
+        update() {
+            this.progress += this.speed;
+        }
+
+        draw() {
+            if (this.progress > 1) return;
+            const x = this.p1.x + (this.p2.x - this.p1.x) * this.progress;
+            const y = this.p1.y + (this.p2.y - this.p1.y) * this.progress;
+
+            ctx.beginPath();
+            ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 18;
+            ctx.globalAlpha = 1;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    class Shockwave {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.radius = 5;
+            this.maxRadius = 180;
+            this.alpha = 0.9;
+            this.speed = 5;
+        }
+
+        update() {
+            this.radius += this.speed;
+            this.alpha -= 0.025;
+        }
+
+        draw() {
+            if (this.alpha <= 0) return;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = "#00f0ff";
+            ctx.lineWidth = 2.5;
+            ctx.shadowColor = "#00f0ff";
+            ctx.shadowBlur = 20;
+            ctx.globalAlpha = Math.max(0, this.alpha);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    function createParticles() {
+        particles = [];
+        matrixDust = [];
+        const count = Math.floor((width * height) / 11000);
+        for (let i = 0; i < count; i++) {
+            particles.push(new Particle());
+        }
+        for (let i = 0; i < 50; i++) {
+            matrixDust.push(new Dust());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < matrixDust.length; i++) {
+            matrixDust[i].update();
+            matrixDust[i].draw();
+        }
+
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    const alpha = (1 - dist / 150) * 0.45;
+                    ctx.strokeStyle = "#00f0ff";
+                    ctx.globalAlpha = alpha;
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+
+                    if (Math.random() < 0.0006) {
+                        pulses.push(new Pulse(particles[i], particles[j]));
+                    }
+                }
+            }
+        }
+
+        for (let i = pulses.length - 1; i >= 0; i--) {
+            pulses[i].update();
+            pulses[i].draw();
+            if (pulses[i].progress >= 1) {
+                pulses.splice(i, 1);
+            }
+        }
+
+        for (let i = shockwaves.length - 1; i >= 0; i--) {
+            shockwaves[i].update();
+            shockwaves[i].draw();
+            if (shockwaves[i].alpha <= 0) {
+                shockwaves.splice(i, 1);
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    resize();
+    animate();
+}
+
+if (document.readyState === "complete" || document.readyState === "interactive") {
+    startAiCanvas();
+} else {
+    document.addEventListener("DOMContentLoaded", startAiCanvas);
+}
+window.addEventListener("load", startAiCanvas);
+
+const mockKnowledgeBase = [
+    {
+        id: 1,
+        articleId: "KB-AI-101",
+        topic: "AI Incident Investigation & Root Cause Analysis Workflow",
+        updated: "2026-07-20",
+        content: "This guide outlines the complete workflow for conducting automated AI Root Cause Analysis (RCA) on critical infrastructure incidents. Learn how Haven AI correlates telemetry, log streams, and system state snapshots to determine primary fault factors.",
+        pdfs: [{ url: "#", title: "AI_RCA_Standard_Operating_Procedure.pdf" }]
+    },
+    {
+        id: 2,
+        articleId: "KB-TIMELINE-204",
+        topic: "Incident Timeline Synthesis & Forensic Logging",
+        updated: "2026-07-15",
+        content: "Detailed documentation on how Haven automatically synthesizes chronologically ordered event timelines from multi-region cloud services during live outage escalations.",
+        pdfs: []
+    },
+    {
+        id: 3,
+        articleId: "KB-SAFETY-309",
+        topic: "HavenSafety Emergency Protocols & System Recovery",
+        updated: "2026-07-02",
+        content: "Step-by-step failover procedures and safety override controls when executing automated mitigation routines across protected edge nodes.",
+        pdfs: [{ url: "#", title: "HavenSafety_Failover_Guide.pdf" }]
+    }
+];
+
+const searchBox = document.getElementById("search");
+
+searchBox.addEventListener("keyup", function () {
+    let keyword = searchBox.value.trim();
+
+    if (keyword === "") {
+        document.getElementById("results").innerHTML = "";
+        return;
+    }
+
+    document.getElementById("results").innerHTML = `
+        <div class="loading">
+            Searching AI knowledge neural network...
+        </div>
+    `;
+
+    // Check if running inside Google Apps Script environment
+    if (typeof google !== "undefined" && google.script && google.script.run) {
+        google.script.run
+            .withSuccessHandler(renderResults)
+            .withFailureHandler(handleSearchError)
+            .searchKnowledge(keyword);
+    } else {
+        // Standalone preview fallback simulation
+        setTimeout(() => {
+            const filtered = mockKnowledgeBase.filter(item => 
+                item.topic.toLowerCase().includes(keyword.toLowerCase()) || 
+                item.content.toLowerCase().includes(keyword.toLowerCase()) ||
+                item.articleId.toLowerCase().includes(keyword.toLowerCase())
+            );
+            renderResults(filtered);
+        }, 280);
+    }
+});
+
+function renderResults(results) {
+    let html = "";
+
+    if (!results || results.length === 0) {
+        html = `
+            <div class="no-results">
+                No matching articles found in Haven Knowledge Base.
+            </div>
+        `;
+    } else {
+        results.forEach(function (article) {
+            html += `
+                <div class="article-card" onclick="showArticle(${article.id})">
+                    <div class="article-card-badge">
+                        ${article.articleId || 'KB-ARTICLE'}
+                    </div>
+                    <h3>${article.topic}</h3>
+                    <p>${article.content || article.snippet || ''}</p>
+                </div>
+            `;
+        });
+    }
+
+    document.getElementById("results").innerHTML = html;
+}
+
+function handleSearchError(error) {
+    document.getElementById("results").innerHTML = `
+        <div class="no-results">
+            Error retrieving knowledge results. Please try again.
+        </div>
+    `;
+    console.error("Search Error:", error);
+}
+
+function showArticle(id) {
+    if (typeof google !== "undefined" && google.script && google.script.run) {
+        google.script.run
+            .withSuccessHandler(displayModalArticle)
+            .getArticle(id);
+    } else {
+        // Standalone preview fallback
+        const found = mockKnowledgeBase.find(a => a.id === id);
+        displayModalArticle(found);
+    }
+}
+
+function displayModalArticle(article) {
+    if (!article) return;
+
+    document.getElementById("modalTitle").innerText = article.topic;
+
+    let pdfSection = "";
+
+    if (article.pdfs && article.pdfs.length > 0) {
+        pdfSection = `
+            <hr>
+            <h3 style="font-size: 16px; margin-bottom: 12px; color: #fff;">📄 Attachment Documents</h3>
+        `;
+
+        article.pdfs.forEach(function(pdf, index) {
+            pdfSection += `
+                <a href="${pdf.url}" target="_blank" class="pdf-card">
+                    <div class="pdf-icon">📄</div>
+                    <div class="pdf-info">
+                        <strong>${pdf.title || 'PDF Document ' + (index + 1)}</strong>
+                        <small>Click to open document in new tab</small>
+                    </div>
+                </a>
+            `;
+        });
+    }
+
+    document.getElementById("modalContent").innerHTML = `
+        <div style="margin-bottom: 12px;">
+            <span class="article-card-badge">${article.articleId || 'KB-ARTICLE'}</span>
+            <span style="font-size: 13px; color: var(--text-muted); margin-left: 10px;">
+                Last Updated: ${article.updated || "N/A"}
+            </span>
+        </div>
+
+        <div style="white-space: pre-wrap; line-height: 1.8;">
+            ${article.content}
+        </div>
+
+        ${pdfSection}
+    `;
+
+    document.getElementById("articleModal").style.display = "block";
+}
+
+function closeArticle() {
+    document.getElementById("articleModal").style.display = "none";
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById("articleModal");
+    if (event.target === modal) {
+        closeArticle();
+    }
+};
+</script>
+
+</body>
+</html>
