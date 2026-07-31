@@ -1343,22 +1343,27 @@ searchBox.addEventListener("keyup", function () {
     `;
 
     // Check if running inside Google Apps Script environment
-    if (typeof google !== "undefined" && google.script && google.script.run) {
-        google.script.run
-            .withSuccessHandler(renderResults)
-            .withFailureHandler(handleSearchError)
-            .searchKnowledge(keyword);
+ fetch(WEB_APP_URL, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        action: "search",
+        keyword: keyword
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        renderResults(data.results);
     } else {
-        // Standalone preview fallback simulation
-        setTimeout(() => {
-            const filtered = mockKnowledgeBase.filter(item => 
-                item.topic.toLowerCase().includes(keyword.toLowerCase()) || 
-                item.content.toLowerCase().includes(keyword.toLowerCase()) ||
-                item.articleId.toLowerCase().includes(keyword.toLowerCase())
-            );
-            renderResults(filtered);
-        }, 280);
+        handleSearchError(data.error);
     }
+})
+.catch(error => {
+    handleSearchError(error);
+});
 });
 
 function renderResults(results) {
