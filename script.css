@@ -37,7 +37,8 @@ return HtmlService.createHtmlOutputFromFile(filename).getContent();
  * @return {Array}
  */
 function searchKnowledge(keyword) {
-
+const WEB_APP_URL =
+"https://script.google.com/a/macros/havensafety.com/s/AKfycbyBu-7KiWdSlnM31262V7OK5XF8WE2AdPWkgSNX37ts_pJphcuKOZSPxCH6kjjtM_YH3g/exec";
   if (!keyword) return [];
 
   const searchTerm = keyword.toString().trim().toLowerCase();
@@ -330,4 +331,59 @@ function askKnowledgeBaseAI(userQuestion) {
     Logger.log("Execution Error: " + err.toString());
     return "An internal server error occurred while processing your query: " + err.toString();
   }
+}
+      function doPost(e) {
+
+  try {
+
+    const request = JSON.parse(e.postData.contents);
+
+    let result;
+
+    switch (request.action) {
+
+      case "chat":
+        result = {
+          success: true,
+          reply: askKnowledgeBaseAI(request.question)
+        };
+        break;
+
+      case "search":
+        result = {
+          success: true,
+          results: searchKnowledge(request.keyword)
+        };
+        break;
+
+      case "article":
+        result = {
+          success: true,
+          article: getArticle(request.id)
+        };
+        break;
+
+      default:
+        result = {
+          success: false,
+          error: "Unknown action."
+        };
+
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success:false,
+        error:err.toString()
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  }
+
 }
