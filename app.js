@@ -1,5 +1,5 @@
 // ?? REPLACE WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP URL (must end in /exec)
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby5hiXfzqpU95W9H2KAl5ywmfFixDxvWtRb30D6cbAv7tSF_SPslTEkEJt2BnaRgdwbpA/exec";
 
 /**
  * Universal helper function to call Google Apps Script from Netlify.
