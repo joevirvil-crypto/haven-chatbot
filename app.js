@@ -10,7 +10,7 @@ async function callBackend(action, payload = {}) {
     const response = await fetch(APPS_SCRIPT_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "text/plain;charset=utf-8"
+        "Content-Type": "text/plain;charset=utf-8" // Bypasses CORS Preflight
       },
       body: JSON.stringify({ action: action, ...payload })
     });
@@ -19,7 +19,7 @@ async function callBackend(action, payload = {}) {
     if (result.status === "error") throw new Error(result.message);
     return result.data;
   } catch (err) {
-    console.error("Backend API Error (" + action + "):", err);
+    console.error("Backend Error:", err);
     throw err;
   }
 }
