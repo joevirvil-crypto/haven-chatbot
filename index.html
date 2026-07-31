@@ -870,27 +870,39 @@
     const loadingId = appendTypingIndicator();
 
     // Call server-side function in Code.gs
-    if (typeof google !== 'undefined' && google.script && google.script.run) {
-      google.script.run
-        .withSuccessHandler(function(response) {
-          removeTypingIndicator(loadingId);
-          appendChatMessage('bot', response);
-          setChatLoading(false);
-        })
-        .withFailureHandler(function(error) {
-          removeTypingIndicator(loadingId);
-          appendChatMessage('bot', 'Error contacting server: ' + error.message);
-          setChatLoading(false);
-        })
-        .askKnowledgeBaseAI(question);
+   fetch(WEB_APP_URL, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        action: "chat",
+        question: question
+    })
+})
+.then(response => response.json())
+.then(data => {
+
+    removeTypingIndicator(loadingId);
+
+    if (data.success) {
+        appendChatMessage("bot", data.reply);
     } else {
-      // Mock fallback for testing outside Google Apps Script web app preview
-      setTimeout(function() {
-        removeTypingIndicator(loadingId);
-        appendChatMessage('bot', 'Demo Mode: Running outside Google Apps Script environment. Please deploy as a Web App to query your Google Sheet.');
-        setChatLoading(false);
-      }, 1000);
+        appendChatMessage("bot", data.error || "Unknown error.");
     }
+
+    setChatLoading(false);
+
+})
+.catch(error => {
+
+    removeTypingIndicator(loadingId);
+
+    appendChatMessage("bot", "Error: " + error.message);
+
+    setChatLoading(false);
+
+});
   }
 
   /**
