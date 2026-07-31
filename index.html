@@ -1403,15 +1403,28 @@ function handleSearchError(error) {
 }
 
 function showArticle(id) {
-    if (typeof google !== "undefined" && google.script && google.script.run) {
-        google.script.run
-            .withSuccessHandler(displayModalArticle)
-            .getArticle(id);
-    } else {
-        // Standalone preview fallback
-        const found = mockKnowledgeBase.find(a => a.id === id);
-        displayModalArticle(found);
-    }
+
+    fetch(WEB_APP_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            action: "article",
+            id: id
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+        if (data.success) {
+            displayModalArticle(data.article);
+        } else {
+            alert(data.error);
+        }
+
+    });
+
 }
 
 function displayModalArticle(article) {
