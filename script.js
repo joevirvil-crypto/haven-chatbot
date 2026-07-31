@@ -263,7 +263,7 @@ function askKnowledgeBaseAI(userQuestion) {
     if (!userQuestion || userQuestion.trim() === "") {
       return "Please enter a valid question.";
     }
-
+PropertiesService.getScriptProperties().getProperty("AQ.Ab8RN6Ijclr3bqrPlRPWdJgcEztcFmLMrbWPSlDqhqQmnWHZcw");
     // Retrieve API key from CONFIG or Script Properties
     var apiKey = PropertiesService
     .getScriptProperties()
