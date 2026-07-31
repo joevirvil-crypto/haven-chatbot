@@ -387,3 +387,59 @@ function askKnowledgeBaseAI(userQuestion) {
   }
 
 }
+
+function doPost(e) {
+
+  try {
+
+    const data = JSON.parse(e.postData.contents);
+
+    let result = {};
+
+    switch (data.action) {
+
+      case "chat":
+        result = {
+          success: true,
+          reply: askKnowledgeBaseAI(data.question)
+        };
+        break;
+
+      case "search":
+        result = {
+          success: true,
+          results: searchKnowledge(data.keyword)
+        };
+        break;
+
+      case "article":
+        result = {
+          success: true,
+          article: getArticle(data.id)
+        };
+        break;
+
+      default:
+        result = {
+          success: false,
+          error: "Unknown action."
+        };
+
+    }
+
+    return ContentService
+      .createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: false,
+        error: err.toString()
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  }
+
+}
