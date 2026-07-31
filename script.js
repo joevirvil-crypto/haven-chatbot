@@ -199,9 +199,7 @@ function onEdit(e) {
 
 // Global configuration constant
 var CONFIG = {
-  // Set your Gemini API key here or store it in Script Properties
-  GEMINI_API_KEY: "AQ.Ab8RN6Ijclr3bqrPlRPWdJgcEztcFmLMrbWPSlDqhqQmnWHZcw", // Insert your Gemini API key here or set script property 'GEMINI_API_KEY'
-  SHEET_NAME: "KnowledgeBase", // Optional: Target sheet name, falls back to first sheet if not found
+  SHEET_NAME: "KnowledgeBase",
   MODEL_NAME: "gemini-3-flash-preview"
 };
 
@@ -267,7 +265,9 @@ function askKnowledgeBaseAI(userQuestion) {
     }
 
     // Retrieve API key from CONFIG or Script Properties
-    var apiKey = CONFIG.GEMINI_API_KEY || PropertiesService.getScriptProperties().getProperty("GEMINI_API_KEY");
+    var apiKey = PropertiesService
+    .getScriptProperties()
+    .getProperty("GEMINI_API_KEY");
     
     if (!apiKey) {
       return "Configuration Error: Gemini API key is missing. Please set GEMINI_API_KEY in Code.gs or Script Properties.";
