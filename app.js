@@ -1,5 +1,5 @@
 // ⚠️ Your Google Apps Script Web App Endpoint URL
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxEn5iyGdRf852Nx2bqdK03yAc1ewI9ag9xezOqNiUmpvkud9Bdwv6MhwMk3MMt6_D7gA/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby5hiXfzqpU95W9H2KAl5ywmfFixDxvWtRb30D6cbAv7tSF_SPslTEkEJt2BnaRgdwbpA/exec";
 
 /**
  * Universal helper function to call Google Apps Script.
