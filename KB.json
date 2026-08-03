@@ -1,0 +1,394 @@
+[
+  {
+    "Topic": "Haven Applications",
+    "Content": "HavenSIGHT\n• Used to report, manage, and investigate incidents.\nSupports the complete incident lifecycle from reporting to closure.\nIncludes AI-assisted investigation tools.\n\nHavenEDGE\n• Collects operational and safety data from connected devices and systems.\nProvides data used during incident investigations.\"\n\nSettings\n\n• For preferrence set up, click the profile icon on the upper right corner. This will give a drop down wich consist of the list below where you can modify.\n- First and Last Name\n- Preferred Date Format\n- Default Incident Country\n- Measurement Units\n- Language",
+    "Article ID": "HAV-KB0101",
+    "Last Updated": "7/30/2026 14:08",
+    "PDF File ID": "1Iz2Xg8ENdTqtUyK9i_IxLvsXmprdVCZC,1G8vIC8XCsVPz51e49Oca_NDiGSQhkra0"
+  },
+  {
+    "Topic": "Incident Lifecycle",
+    "Content": "Typical incident stages:\n\n• Draft\n• Open\n• Under Investigation\n• Corrective Actions\n• Closed",
+    "Article ID": "HAV-KB0102",
+    "Last Updated": "7/23/2026 22:42",
+    "PDF File ID": "1YHXf_TtO5W6Pg7wuRz84g2SUDe4567fQ"
+  },
+  {
+    "Topic": "Case Management",
+    "Content": "Case Management is the initial workspace inside an incident investigation where users establish the core case record, assemble the investigation team, and collect contextual and evidentiary sources. \n\n1. Key Workspace Elements\n\n• Investigation Details: Houses structured factual data such as the event narrative, dates, harm and severity metrics, organization units, location parameters, external system references, and third-party contractors.\n\n• People on the Investigation: Separates the Incident Created By user from human collaborators. Collaborators can be assigned roles (e.g., Commenter) to view, comment, or edit cases. \n\n• AI Investigation Team: Features an Investigation Lead (Haven Al) to \norchestrate analysis alongside specialized supporting experts (e.g., \nEngineering, OSHA & Regulatory, Safety Programs, Equipment & PPE, \nWorkplace Conditions, Training & Communication). \n\n• Auto-Collected Evidence and Context: Automatically pulls structured data \nfrom the Haven Industry and Knowledge Graphs, including:\n\n• Regulatory: Industry standards and compliance exposure. \n• Company Programs: Relevant internal customer documentation. \n• Witness Statements: Collected via direct secure requests tracking status,\nlanguage, and deadlines.\n• Weather Conditions: Retrieved automatically based on the incident date \nand location. \n\n2. Evidence Upload & Controls\n\n\n• File Types & Limits: Accepts PDF, Word, PowerPoint, text, images, and \nvideos. Size limits are 10 MB for general files and 50 MB for videos (Word and \nPowerPoint documents are automatically converted to PDF before \nprocessing).\n\n• Evidence List Controls:\n- Restricted: Flags sensitive evidence to manage role-based privacy.\n- Reference Only: Designates files as available for background reference\nwithout treating them as primary\nanalytical inputs for downstream AI generation.\n- Actions: Supports direct file downloading, deletion (where permitted), and \nvisibility previews.",
+    "Article ID": "HAV-KB0103",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "1yiNQLWSDnoAZc5B-f8I7pWOU6eHZkQEJ"
+  },
+  {
+    "Topic": "Roles",
+    "Content": "Incident Created By\n\nPerson who created the incident.\n\nCollaborator\n\n• Team member who assists with the investigation.\n\nAI Expert\n\n• AI assistant that helps summarize information and generate suggestions.",
+    "Article ID": "HAV-KB0104",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "1Iz2Xg8ENdTqtUyK9i_IxLvsXmprdVCZC, 12-FFjEwVm5TWA0cwueTphP-TgIbezJmW"
+  },
+  {
+    "Topic": "Auto Collected Evidence & Context",
+    "Content": "Common context sources include:\n\n• Procedures\n• Assets\n• Incidents\n• Sites\n\nThis information gives investigators additional context without manual searching.",
+    "Article ID": "HAV-KB0105",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "1yiNQLWSDnoAZc5B-f8I7pWOU6eHZkQEJ"
+  },
+  {
+    "Topic": "Incident Timeline",
+    "Content": "The Incident Timeline workspace translates assembled case evidence into an ordered, chronological account of events, highlighting discrepancies for human evaluation. \n\n1. How Haven Builds the Timeline\n\n• Haven synthesizes case data—such as reports, witness statements, work records, and \nmedia—to extract time-relevant facts, group related elements, order them chronologically, \nand flag contradictions.\n\n• Core Support Rule (\"Conflicts Before Conclusions\"): A timeline conflict indicates that the \nevidence presents multiple versions of events. Support assists with navigation and controls, \nbut never chooses which witness \nis correct, invents missing times, or makes investigative decisions for the customer.\n\n2. Anatomy of a Timeline Event\n\n• Each event card functions as a compact evidence claim containing:\n\n• Date and Time: Displayed in incident-local time.\n• Description: A synthesized account of the action or condition (treated as customer-owned \ntext).\n• Source(s): Direct links back to the foundational evidence documents. \n• Status Markers & Controls: Rail markers (check marks for standard events, amber for \nwarnings/conflicts), expand/collapse chevrons, and a three-legged menu allowing \nauthorized users to Move Up, Move Down, or Delete events.\n• Manual Event Creation: Users can add missing events via the Generate Event dialog by \nsupplying a defensible incident-local timestamp and a neutral, evidence-backed description.",
+    "Article ID": "HAV-KB0106",
+    "Last Updated": "7/27/2026 20:26",
+    "PDF File ID": "1Tph6Vky5jvd3s6IvqJVzYMFPktxjLNRi"
+  },
+  {
+    "Topic": "Root Cause Analysis (RCA)",
+    "Content": "Root Cause Analysis (RCA)\nPlatform Overview\n\nThe Root Cause Analysis phase becomes available after the Incident Timeline has been accepted. During this phase, the platform analyzes the uploaded evidence and the accepted timeline to generate one or both of the following:\n\n• Five Whys Analysis\n• Fishbone (6Ms) Analysis\n\nThe platform may also:\n\nDisplay requests for additional information or clarification.\nAssign a confidence level (High, Medium, or Low) to the suggested RCA.\nAllow users to accept the suggested RCA or continue refining the information before proceeding.\n\nOnce the suggested RCA is accepted, the Corrective Action phase becomes available.",
+    "Article ID": "HAV-KB0107",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "1szVe99V_2V2L9Fs1SGA9XG3IYwQcS3mf, 1pf7FRB8YXMPFlcyKKD0Qj-uLybhrBivJ"
+  },
+  {
+    "Topic": "Corrective Action & Preventive Action (CAPA)",
+    "Content": "Corrective Action & Preventive Action (CAPA)\nPlatform Overview\n\nAfter the Root Cause Analysis has been accepted, the platform generates suggested Corrective Actions (CA) and Preventive Actions (PA) based on the accepted RCA.\n\nFor each suggested CAPA, the platform provides:\n\n• A recommended corrective and/or preventive action.\n• An Effort vs. Impact graph to help evaluate the recommendation.\n• A description explaining the recommendation.\n\nOptions to:\n• Accept the suggested CAPA.\n• Modify the suggested CAPA.\n• Reject the suggestion.\n• Create a new CAPA manually.\n• Assignment of an owner.\n• Target implementation date.\n\nOnce a CAPA has been accepted and finalized, the final reporting phase becomes available.",
+    "Article ID": "HAV-KB0108",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "1szVe99V_2V2L9Fs1SGA9XG3IYwQcS3mf, 1YHXf_TtO5W6Pg7wuRz84g2SUDe4567fQ"
+  },
+  {
+    "Topic": "AI Concepts",
+    "Content": "Large Language Model (LLM)\n\nReads and generates text based on patterns learned from training data.\n\nKnowledge Graph\n\n• Stores customer-specific information such as:\n\n- Sites\n- Assets\n- Procedures\n- Incidents\n- Relationships between data\n- Retrieval-Augmented Generation (RAG)\n\nCombines the LLM with the Knowledge Graph so AI responses use the customer's own information rather than only general knowledge.\n\nOCR (Optical Character Recognition)\n\nExtracts text from images and scanned documents so it can be searched and analyzed.",
+    "Article ID": "HAV-KB0109",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "16eGAi-hJMy7Vi_m_IP6HDxsIMEEYKqsM"
+  },
+  {
+    "Topic": "Common Troubleshooting - Cannot see the case incident",
+    "Content": "Scenario - Cannot see the incident\n\nIssue: \" My incident disappeared\"\n\nCheck:\n\nIncident filters\nSearch criteria\nUser permissions\nTimeline looks wrong.\n\nCheck:\n\nSource(s)\nEvent timestamps\nIncident local time\nMissing evidence\nExpected data source\nMissing timeline event.\n\nVerify:\n\nEvidence uploaded successfully\nSource is available\nEvent synchronization completed\nCorrective Actions page is blank.\n\nVerify:\n\nIncident status\nExisting corrective actions\nUser permissions\nFilters\nDifferent Total Incident counts.\n\nUsually caused by:\n\nDifferent filters\nUser permissions\nDifferent views\n\nNot necessarily a system defect.",
+    "Article ID": "HAV-KB0110",
+    "Last Updated": "7/23/2026 22:44",
+    "PDF File ID": "1Iz2Xg8ENdTqtUyK9i_IxLvsXmprdVCZC, 1yiNQLWSDnoAZc5B-f8I7pWOU6eHZkQEJ"
+  },
+  {
+    "Topic": "Best Practices",
+    "Content": "• Verify before assuming a software issue.\n\n• Review incident status first.\n\n• Check filters and permissions.\n\n• Confirm evidence sources.\n\n• Use empathy when responding to concerned users.\n\n• Document all troubleshooting steps.\n\n• Escalate only after completing basic validation.",
+    "Article ID": "HAV-KB0111",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "12-FFjEwVm5TWA0cwueTphP-TgIbezJmW, 1Cqjliv9yqu9KFxTJye-LuPwVyFmlsLAb, 1-POcvfxm7XkDThsT_YqAPmQ4ImtHUluU"
+  },
+  {
+    "Topic": "Quick Reference Checklist",
+    "Content": "Before escalating a ticket, verify:\n\n☐ Incident ID\n\n☐ User permissions\n\n☐ Incident status\n\n☐ Applied filters\n\n☐ Timeline Source(s)\n\n☐ Evidence availability\n\n☐ Corrective Actions\n\n☐ Error messages or screenshots\n\n☐ Steps to reproduce\n\n☐ Expected vs. actual behavior\n\nSample Support Response\n\n\"I understand this issue is affecting your investigation, and I'm sorry for the inconvenience. I'll first verify the incident status, permissions, and available evidence to determine why this is happening before we proceed with further troubleshooting.",
+    "Article ID": "HAV-KB0112",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "1G8vIC8XCsVPz51e49Oca_NDiGSQhkra0"
+  },
+  {
+    "Topic": "Acronyms",
+    "Content": "AI - Artificial Intelligence Technology that enables computers to perform tasks that normally require human intelligence, such as analyzing incidents and generating insights.\nLLM - Large Language Model An AI model trained on vast amounts of text that understands and generates human-like language. Used to assist users by answering questions and summarizing information.\nRAG - Retrieval-Augmented Generation An AI approach that combines an LLM with retrieved customer-specific information (such as Knowledge Graph data) to generate more accurate and context-aware responses.\nKG - Knowledge Graph A structured database that stores relationships between incidents, assets, people, sites, procedures, and other customer data to provide context for AI.\nRCA - Root Cause Analysis A process used to identify the underlying cause of an incident instead of only addressing its symptoms.\n5 Whys - Five Whys An RCA method that repeatedly asks \"Why?\" to drill down to the root cause of a problem.\n6Ms - Six Ms A Fishbone Diagram categorization method consisting of Man (People), Machine, Method, Material, Measurement, and Mother Nature (Environment) to help identify possible causes.\nOCR - Optical Character Recognition Technology that converts text from scanned documents or images into editable digital text.\nPDF - Portable Document Format A file format commonly used for sharing documents while preserving formatting.\nUI - User Interface The screens, buttons, menus, and other visual elements users interact with in Haven.\nUTC - Coordinated Universal Time The international standard time reference used to synchronize timestamps across different time zones.\nID - Identifier A unique value assigned to records such as incidents, users, or cases for easy identification.\nAPI - Application Programming Interface A set of rules that allows Haven to communicate and exchange data with other software systems.\nCSV - Comma-Separated Values A file format commonly used to import or export tabular data.",
+    "Article ID": "HAV-KB0113",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Haven-specific terms",
+    "Content": "HavenSIGHT - Haven's AI-powered investigation platform that helps organizations manage incidents, investigations, evidence, and root cause analysis.\n\nHavenEDGE - Haven's edge application that connects operational systems and devices to Haven by collecting and synchronizing data.\n\nCase Management - The module used to organize an investigation by managing evidence, tasks, collaborators, witness requests, and corrective actions.\n\nIncident Timeline - A chronological view of events related to an incident, helping investigators understand what happened and when.\n\nCorrective Actions - Tasks created to prevent the same incident from happening again after the investigation identifies the root cause.\n\nAuto Collected Evidence - Information automatically gathered by Haven from connected systems and data sources to support investigations.\n\nCollaborator - A user invited to participate in an investigation by reviewing evidence or completing assigned tasks.\n\nAI Expert - Haven's AI assistant that analyzes available information and provides recommendations or insights during investigations.\n\nWitness Request - A request sent to witnesses to collect statements or additional information about an incident.\n\nConfidence Level - Indicates how confident the AI is in its generated analysis (High, Medium, or Low). It reflects confidence in the AI's output, not whether the conclusion is definitely correct.",
+    "Article ID": "HAV-KB0114",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "1lfJDPs3QAf_a4AbwuNNtl0nuVMChHLoN, 1Cqjliv9yqu9KFxTJye-LuPwVyFmlsLAb, 1Iz2Xg8ENdTqtUyK9i_IxLvsXmprdVCZC"
+  },
+  {
+    "Topic": "RCA Methods",
+    "Content": "Five Whys - Identifies the root cause by repeatedly asking \"Why?\" until the underlying cause is found.\nFishbone Diagram (Ishikawa Diagram) - Organizes possible causes into categories (6Ms) to systematically investigate contributing factors.\nTimeline Analysis - Uses the sequence of events to identify where failures or contributing factors occurred during an incident.",
+    "Article ID": "HAV-KB0115",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": "1PZbvPvumt37Vt0R9Qd8ttT5VUOPMbut0, 1szVe99V_2V2L9Fs1SGA9XG3IYwQcS3mf, 1pf7FRB8YXMPFlcyKKD0Qj-uLybhrBivJ"
+  },
+  {
+    "Topic": "Common Troubleshooting - Incident Creation",
+    "Content": "Scenario – Unable to Create an Incident\nCustomer Concern\n\nI filled out the incident form but the Create Incident button isn't working.\n\nPossible Causes\n• Required fields are missing.\n• Invalid information entered.\n• Internet connection interruption.\n• Browser issue.\n\nTroubleshooting Steps\n• Verify that all required fields are completed.\n• Check for any fields highlighted as required.\n• Refresh the browser.\n• Sign in again.\n• Try using another supported browser.\n• Attempt to create the incident again.\n\nSample Email Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nWe're sorry to hear you're experiencing difficulty creating an incident.\n\nPlease try the following:\n\nEnsure all required fields have been completed.\nCheck if any required fields are highlighted or missing information.\nRefresh your browser and sign in again.\nIf the issue persists, try using another supported browser.\nAttempt to create the incident once more.\n\nOnce you've completed these steps, please let us know if you were able to create the incident successfully or if you still need further assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0116",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Case Management",
+    "Content": "Scenario – Cannot Upload Evidence\nCustomer Concern\n\nI cannot upload my witness statement.\n\nPossible Causes\n• Unsupported file type\n• File exceeds upload limit\n• Internet interruption\n• Browser issue\n\nTroubleshooting Steps\n• Verify the file format is supported.\n• Reduce file size if necessary.\n• Refresh the page.\n• Upload again.\n• Try another browser.\n\nSample Reply\n\nHi [Customer Name],\n\nThank you for reaching out.\n\nIf you're unable to upload your evidence, please try the following:\n\n• Verify that the file format is supported.\n• Ensure the file size is within the allowed limit.\n• Refresh the page and try uploading again.\n• If available, try using another supported browser.\n\nPlease let us know if the upload was successful after completing these steps or if you still require assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0117",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Next Phase Is Locked",
+    "Content": "Scenario – Next Phase Is Locked\nCustomer Concern\n\nI already uploaded my evidence but Incident Timeline is still locked.\n\nAgent Knowledge\n\nThe Incident Timeline remains locked until the required evidence has been uploaded and completed.\n\nTroubleshooting\n• Review all required evidence.\n• Ensure uploads have finished successfully.\n• Refresh the page.\n• Sign back in.\n\nSample Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nThe Incident Timeline becomes available after all required evidence has been successfully uploaded during the Case Management phase.\n\nPlease try the following:\n\nVerify that all required evidence has been uploaded successfully.\nConfirm that the uploads have completed.\nRefresh the page.\nSign in again and check if the Incident Timeline is now available.\n\nPlease let us know whether the Incident Timeline has been unlocked after completing these steps or if you need further assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0118",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Cannot Add Collaborators",
+    "Content": "Scenario 4 – Cannot Add Collaborators\n\nTroubleshooting\n• Refresh page\n• Verify collaborator information\n• Try again\n• Try another browser\n\nSample Reply\n\nHi [Customer Name],\n\nThank you for reaching out.\n\nIf you're unable to add collaborators during the Case Management phase, please try the following:\n\nRefresh the page.\nVerify the collaborator information entered.\nTry adding the collaborator again.\nIf the issue continues, try another supported browser.\n\nPlease let us know if the collaborator was successfully added or if you still require assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0119",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Incident Timeline",
+    "Content": "Scenario – Timeline Did Not Generate\n\nCustomer Concern\n\nThe Generate Timeline button doesn't work.\n\nTroubleshooting\n• Verify all evidence has been uploaded.\n• Refresh page.\n• Click Generate Timeline again.\n• Wait several moments.\n• Try another browser.\n\nSample Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nIf the timeline was not generated, please try the following:\n\nVerify that all required evidence has been uploaded.\nRefresh the page.\nClick Generate Timeline again.\nAllow a few moments for the timeline to generate.\nIf needed, try another supported browser.\n\nPlease let us know if the timeline was successfully generated or if you still need assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0120",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Timeline Has Major/Minor Conflict",
+    "Content": "Scenario – Timeline Has Major/Minor Conflict\n\nCustomer Concern\n\nWhy is my timeline showing conflicts?\n\nAgent Knowledge\n\nConflicts indicate inconsistencies detected in the uploaded evidence.\n\nSample Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nMajor and Minor Conflict indicators appear when the platform detects inconsistencies within the uploaded evidence, such as differences in dates, times, or other incident details.\n\nYou may review the highlighted conflicts and make any necessary corrections before accepting the suggested timeline. Although the platform allows the suggested timeline to be accepted without resolving the conflicts, reviewing them first is recommended to improve the overall accuracy of the investigation.\n\nPlease let us know if this answers your concern or if you need further assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0121",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - My Changes Were Not Saved",
+    "Content": "Scenario – My Changes Were Not Saved\n\nThis is one of the most important scenarios.\n\nCustomer Concern\n\nI corrected the timeline but it reverted back.\n\nAgent Knowledge\n\nChanges are only saved after clicking the ✔ check mark.\n\nSample Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nChanges made while resolving timeline conflicts are only saved after selecting the ✔ Check Mark beside the edited item.\n\nIf changes are made without clicking the check mark, they will not be saved.\n\nPlease try the following:\n\n• Edit the timeline information.\n• Click the ✔ Check Mark to save each individual change.\n• Review the timeline to confirm your updates were saved.\n\nPlease let us know if your changes were successfully saved or if you still need further assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0122",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Cannot Proceed to Root Cause Analysis",
+    "Content": "Scenario – Cannot Proceed to Root Cause Analysis\n\nTroubleshooting\n\nVerify that the suggested timeline has been accepted.\n\nSample Reply\n\nHi [Customer Name],\n\nThe Root Cause Analysis phase becomes available only after the suggested Incident Timeline has been accepted.\n\nPlease review your generated timeline and select Accept Suggested Timeline to continue.\n\nOnce completed, please let us know if the Root Cause Analysis phase has been unlocked or if you still need assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0123",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Root Cause Analysis Phase Is Locked",
+    "Content": "Scenario – Root Cause Analysis Phase Is Locked\n\nCustomer Concern\n\nI already finished the Incident Timeline, but I still can't access the Root Cause Analysis phase.\n\nPossible Causes\n• The suggested timeline has not been accepted.\n• The previous phase was not completed successfully.\n• Browser caching issue.\nTroubleshooting Steps\n• Return to the Incident Timeline phase.\n• Verify that the suggested timeline has been accepted.\n• Refresh the page and check if the Root Cause Analysis phase is now available.\n\nSample Email Reply\n\nSubject: Unable to Access Root Cause Analysis\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nThe Root Cause Analysis phase becomes available after the suggested Incident Timeline has been accepted.\n\nPlease try the following:\n\n• Return to the Incident Timeline phase.\n• Verify that you have selected Accept Suggested Timeline.\n• Refresh the page.\n• Generate the Root Cause Analysis.\n\nAfter completing these steps, please let us know if the Root Cause Analysis phase has been unlocked or if you still need additional assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0124",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Root Cause Analysis Is Not Generating",
+    "Content": "Scenario – Root Cause Analysis Is Not Generating\n\nCustomer Concern\n\nThe system is not generating the Root Cause Analysis.\n\nPossible Causes\n• Previous phase not completed.\n• Temporary browser issue.\n• Generation request did not complete.\n\nTroubleshooting Steps\n• Confirm that the Incident Timeline has been accepted.\n• Refresh the page.\n• Reopen the Root Cause Analysis phase.\n• Wait a few moments for the generation process.\n• Try another supported browser.\n\nSample Email Reply\n\nHi [Customer Name],\n\nThank you for reaching out.\n\nIf the Root Cause Analysis is not generating, please try the following:\n\nConfirm that the Incident Timeline has been accepted.\nRefresh the page.\nReopen the Root Cause Analysis phase.\nAllow a few moments for the analysis to generate.\nIf needed, try another supported browser.\n\nOnce completed, please let us know if the Root Cause Analysis was generated successfully or if you still require assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0125",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Why Is the Confidence Level Medium?",
+    "Content": "Scenario – Why Is there a Confidence Level Medium?\n\nCustomer Concern\n\nWhy does my Root Cause Analysis show Medium Confidence?\n\nAgent Knowledge\n\nConfidence is based on the amount, quality, and consistency of the information provided during the investigation.\n\nA confidence rating does not necessarily mean the RCA is incorrect.\n\nSample Email Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nThe confidence indicator reflects how much supporting information is available for the generated Root Cause Analysis.\n\nA Medium Confidence rating generally means there may be limited, incomplete, or inconsistent information available for the platform to analyze. It does not automatically mean the suggested Root Cause Analysis is incorrect.\n\nYou may review the available information, provide additional details if appropriate, or continue with the suggested analysis based on your organization's investigation process.\n\nPlease let us know if this answers your question or if you need further assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0126",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - What Does High, Medium Confidence Mean?",
+    "Content": "Scenario – What Does High, Medium Confidence Mean?\n\nCustomer Concern\n\nWhat do the confidence levels mean?\n\nSample Email Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nThe confidence level indicates how strongly the available information supports the suggested Root Cause Analysis.\n\n• High Confidence – The available evidence consistently supports the suggested root cause.\n• Medium Confidence – The available information generally supports the suggestion, but additional clarification may improve accuracy.\n\nThese confidence levels are intended to help guide your review and should not be considered a final determination. The investigation team should review the suggested analysis before accepting it.\n\nPlease let us know if you have any other questions or need further assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0127",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Can I Ignore the Warnings?",
+    "Content": "Scenario – Can I Ignore the Warning?\n\nCustomer Concern\n\nCan I continue without answering the clarification requests?\n\nSample Email Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nYes. The clarification requests are intended to help improve the quality of the suggested Root Cause Analysis. If you determine that the available information is sufficient for your investigation, you may continue without providing additional details or resolving the conflicts but it is recommended.\n\nPlease let us know if this answers your question or if you require further assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0128",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Corrective Action Phase Is Locked",
+    "Content": "Scenario – Corrective Action Phase Is Locked\n\nCustomer Concern\n\nI can't access the Corrective Action phase.\n\nPossible Causes\n• The Root Cause Analysis has not been accepted.\n• The previous phase has not been completed.\n• Browser cache issue.\n\nTroubleshooting Steps\n• Return to the Root Cause Analysis phase.\n• Verify that the suggested Root Cause Analysis has been accepted.\n• Refresh the page and check if the Corrective Action phase is now available.\n\nSample Email Reply\n\nSubject: Unable to Access Corrective Action Phase\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nThe Corrective Action phase becomes available after the suggested Root Cause Analysis has been accepted.\n\nPlease try the following:\n\n• Return to the Root Cause Analysis phase.\n• Verify that you have selected Accept Suggested Root Cause Analysis.\n• Refresh the page and check if the Corrective Action phase is now available.\n\nOnce completed, please let us know if the Corrective Action phase has been unlocked or if you still require assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0129",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - What Does the Effort vs. Impact Graph Mean?",
+    "Content": "Scenario – What Does the Effort vs. Impact Graph Mean?\n\nCustomer Concern\n\nWhat does the graph mean?\n\nAgent Knowledge\n\nThe graph helps visualize the estimated implementation effort compared to the expected impact of the suggested CAPA.\n\nIt is intended to support decision-making and does not determine whether a CAPA must be accepted.\n\nSample Email Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nThe Effort vs. Impact graph provides a visual estimate of the implementation effort and the expected impact of each suggested Corrective or Preventive Action.\n\nThis information is intended to support your decision-making process when reviewing the suggested CAPA. Your organization can determine whether to accept, modify, reject, or create a different CAPA based on its investigation and business requirements.\n\nPlease let us know if this answers your question or if you need further assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0130",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Common Troubleshooting - Can I Edit the Suggested CAPA?",
+    "Content": "Scenario – Can I Edit the Suggested CAPA?\n\nCustomer Concern\n\n\"Can I change the suggested corrective action?\"\n\nSample Email Reply\n\nHi [Customer Name],\n\nThank you for contacting Haven Helpdesk.\n\nYes. The platform allows you to review the suggested Corrective and Preventive Actions and choose the option that best supports your investigation.\n\nDepending on your investigation needs, you may:\n\n• Accept the suggested CAPA.\n• Modify the suggested CAPA.\n• Reject the suggested CAPA.\n• Create your own CAPA.\n\nPlease let us know if this answers your question or if you need additional assistance.\n\nBest,\nHavenSafety Helpdesk Support",
+    "Article ID": "HAV-KB0131",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Level 1 Support Playbooks & Triage",
+    "Content": "Level 1 Support Playbooks & Triage\n\nCommon Case Management & Timeline Issues\n\n• Customer Statement / Symptom:\n\n- \"My evidence is missing.\"\n- \"The AI ignored a document.\"\n- \"The timeline is wrong.\"\n- \"The event time is wrong.\"\n- \"I cannot add/edit/delete an event.\"\n- \"The conflict will not clear.\"\n\n• Primary Support Checks\n\n- Verify correct incident, file count, collapsed sections, upload success, Reference Only \nstatus, \nrestrictions, and browser refresh.\n- Check if the file was set to Reference Only, verify processing completion, upload timing \nrelative to analysis generation, and text readability.\n- Capture exact event details, displayed vs. expected wording/time, source documents, active \nconflicts, and timeline state.\n- Check incident-local time zones, AM/PM selections, source timestamps, and conflict logs.\n- Verify user role, incident ownership, workflow stage, Accepted state status, and required \nfields.\n- Inspect source disagreements, saved event updates, the Resolve flow sequence, and \nbrowser state.\n\nLevel 1 Action & Escalation Thresholds\n\n- Escalate when: The file is verified as fully uploaded and processed, yet persistently fails to \nappear.\n- Escalate when: A valid, non-restricted file processed before generation is consistently \nomitted across tests.\n- Escalate when: Processed evidence is consistently misrepresented after user review and \ncorrections.\n- Escalate when: Saved values continuously revert or display incorrectly relative to stored \nvalues.\n- Escalate when: An authorized user meeting all prerequisites experiences persistent failures \nor errors.\n- Escalate when: Completing the standard resolution workflow fails to update the conflict \nstatus.",
+    "Article ID": "HAV-KB0132",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "High-Consequence Escalation Protocols",
+    "Content": "High-Consequence Escalation Protocols\n\nImmediate Escalation Triggers\n\nInstantly escalate issues involving:\n• Potential unauthorized evidence access or data exposure.\n• Deletion or corruption of critical investigation records.\n• Regulatory, legal, or formal compliance content.\n• Any incident involving a fatality, serious injury, or SIF/PSIF case.\n\nComplete Diagnostic Escalation Packet\n\nWhen escalation is necessary, avoid sending full, unredacted screenshots. Provide a secure diagnostic packet containing:\n\n• Customer name and environment (production vs. training).\n• Incident title and identifier.\n• Current workflow stage and timeline state.\n• Affected user, role, and relationship to the incident.\n• Specific event date, time, description, and sequence position.\n• Conflict title, labels, summaries, and locations (inline vs. side panel).\n• Exact source file names along with their Restricted or Reference Only flags.\n• Expected behavior versus actual behavior, along with exact steps taken.\n• Browser, version, session refresh steps, and whether the issue reproduces for other users.\n• Protected screenshots omitting unnecessary personal, medical, or confidential data.",
+    "Article ID": "HAV-KB0133",
+    "Last Updated": "7/23/2026 22:37",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Haven Safety AI Knowledge Base",
+    "Content": "Introduction to Haven Safety AI\n\n• Overview\n\nHaven Safety AI is an AI-native safety intelligence platform designed to help organizations investigate workplace incidents, identify root causes, manage corrective actions, and strengthen organizational learning. It supports safety \nprofessionals by accelerating investigation activities while ensuring that final decisions remain under human control. The platform is intended to improve consistency, traceability, and defensibility throughout the incident investigation \nprocess.\n\n• Core Principle\n\nEvery employee supporting or using Haven should understand the platform's primary operating principle:\n\n• AI proposes. Humans decide.\n\nAll AI-generated summaries, timelines, root cause analyses, recommendations, and corrective actions are considered draft working material until they have been reviewed and approved by authorized personnel. Haven does not \nautomatically finalize investigations, assign blame, or approve corrective actions.\nWhy Haven Exists\n\nOrganizations frequently encounter challenges during incident investigations, including:\n\n- Information distributed across multiple systems and documents\n- Variability in investigation quality\n- Weak organizational learning\n- Corrective actions that focus on task completion rather than risk reduction\n- Loss of institutional knowledge as personnel change\n\nHaven addresses these challenges by organizing evidence, supporting structured investigation workflows, and assisting investigators in producing more consistent and evidence-based findings.\n\n• What Haven Is\n\nHaven is designed to function as:\n\n- An AI-native safety intelligence platform\n- An investigation support system\n- A structured workflow for incident investigations\n- A collaborative workspace for investigators\n- A decision-support platform grounded in evidence\n\nHaven assists investigators by:\n\n- Organizing evidence\n- Drafting summaries\n- Building incident timelines\n- Suggesting possible root causes\n- Recommending corrective actions\n- Identifying patterns across investigations\n\nFinal responsibility always remains with the investigation team.\n\n• What Haven Is Not\n\nEmployees should avoid describing Haven as:\n\n- A replacement for safety professionals\n- A replacement for existing EHS systems\n- An autonomous investigation platform\n- A system that automatically determines root causes\n- A system that independently closes investigations\n\nInstead, Haven should always be described as an AI-assisted decision-support platform.\n\n• Platform Components\n\nAlthough these names may not appear directly in the application's navigation, Haven is conceptually divided into two primary functional areas.\n\nHavenSIGHT\n\nProvides organization-wide visibility through:\n\n- Dashboards\n- Incident metrics\n- Trends\n- Reporting\n- Incident lists\n- Monitoring views\n\n• HavenEDGE\n\nProvides the investigation workspace where users perform:\n\n- Case Management\n- Evidence management\n- Incident Timeline creation\n- Root Cause Analysis\n- Corrective Action management\n- Report generation\n\nA future platform component, havenIMPACT, is planned to deliver predictive analytics, leading indicators, and cross-incident trend analysis.\n\n• Human Responsibilities\n\nEmployees using Haven are expected to:\n\n- Review every AI-generated output\n- Verify supporting evidence before approval\n- Correct inaccurate or incomplete AI suggestions\n-Make all final investigation decisions\n- Ensure corrective actions are appropriate and complete\n- Maintain accountability for the official investigation record\n\nAI-generated content should never be accepted solely because it appears well written or confident. Supporting evidence must always be reviewed before approval.\n\nKey Takeaways\n\n- Haven is an AI-assisted safety investigation platform.\n- AI accelerates investigations but never replaces professional judgment.\n- All AI outputs are drafts until reviewed and approved.\n- Human investigators remain accountable for every investigation outcome.\n- Evidence validation is mandatory before accepting AI recommendations.",
+    "Article ID": "HAV-KB0134",
+    "Last Updated": "7/24/2026 14:12",
+    "PDF File ID": "18L_tMkJq9DCaNnt_cE_tlObDglyUQ8jZ"
+  },
+  {
+    "Topic": "Regeneration Scenarios & Practice",
+    "Content": "Regeneration Scenarios & Practice\n\nGoal: Understand how Haven's regeneration system works, what triggers regeneration, how changes cascade through the investigation workflow, and how to guide users in safely regenerating and accepting updated analyses while preserving existing work.\nKey Topics:\nRegeneration Fundamentals: Haven detects upstream changes (evidence, timeline, or RCA) and flags downstream stages that require regeneration. Users control when regeneration occurs, and accepted work is never automatically overwritten.\nRegeneration Triggers: Learn the events that trigger regeneration, including adding, deleting, or editing evidence files, resolving Timeline conflicts, editing or adding RCA causes, and re-accepting regenerated RCA analyses.\nScenario A – New Evidence Uploaded: Practice uploading new evidence after a Timeline and RCA have been accepted, regenerating the Timeline, reviewing updates, re-accepting it, and then regenerating the affected RCA.\nScenario B – RCA Changes: Learn how editing or manually adding a cause in Fishbone RCA automatically triggers regeneration for Corrective Actions, ensuring recommendations reflect the latest root causes.\nScenario C – Evidence Deletion Cascade: Understand the complete regeneration flow when evidence is deleted: Evidence → Timeline → RCA → Corrective Actions, with each stage regenerated and accepted in sequence.\nScenario D – RCA Cause Deletion: Practice deleting a Fishbone cause, re-accepting the RCA, and regenerating Corrective Actions to reflect updated recommendations without losing previously accepted work.\nSupport Best Practices: Reinforce the key helpdesk message that regeneration is expected behavior, not an error. Guide users to regenerate stages in order, review the results, and reassure them that accepted work is preserved until they choose to regenerate.",
+    "Article ID": "HAV-KB0135",
+    "Last Updated": "7/28/2026 15:28",
+    "PDF File ID": ""
+  },
+  {
+    "Topic": "Day 1",
+    "Content": "Welcome to Haven, Safety Context, and Team Operating Model\n\n• Goal: Understand why Haven exists, the platform's value proposition, the support mindset, and core \nteam dynamics.\n• Key Topics:\n- The Founder Story: Joe Hanna’s personal family experience with workplace injuries shapes the\ncore philosophy that \"safety is personal\".\n- Ecosystem: Partnership with The AES Corporation (field context) and AI Fund / Andrew Ng (AI \nstudio expertise).\n- Core Value & Positioning: An AI-native safety intelligence platform designed as a copilot to help \nsafety teams capture evidence, structure investigations, and uncover systemic risk.\n- Responsible AI Rule: Al proposes, humans decide.\n- Key Team Contacts: Joe Hanna (CEO - Mission & Escalations), Jim Wang (CTO - Tech &\nReliability), and Jaskiran Kaur (Program Manager - Logistics & Action Items).",
+    "Article ID": "HAV-KB0136",
+    "Last Updated": "7/24/2026 16:42",
+    "PDF File ID": "1lfJDPs3QAf_a4AbwuNNtl0nuVMChHLoN"
+  },
+  {
+    "Topic": "Day 2",
+    "Content": "Safety Fundamentals and Customer Language\n\n• Goal: Master workplace safety vocabulary, the incident lifecycle, and industry frameworks to support \ncustomers in context\n\n• Key Topics:\n- Incident Lifecycle: Closed loop of 6 stages—Event occurs, Report/Notify, Preserve Evidence, \nInvestigate/Analyze, Corrective/Preventive Actions, and Verify/Learn.\n- Severity Ladder: Distinguishing between Near Misses, First Aid Cases, OSHA Recordables, Lost \nTime Injuries (LTI), and Serious Injuries or Fatalities (SIF).\n- Causal Analysis: Differentiating Immediate (Proximate) Causes from Root Causes (systemic \nflaws).\n- Hierarchy of Controls: Ranking control strength from top to bottom: Elimination, Substitution, \nEngineering Controls, Administrative Controls, and PPE.\n- Industry Vocabularies: Hazard terminology across Utilities (e.g., Arc flash, LOTO), Construction \n(e.g., Focus Four, Trenching), and Oil & Gas (e.g., Process Safety Events, DROPS, Hot Work).",
+    "Article ID": "HAV-KB0137",
+    "Last Updated": "7/24/2026 16:44",
+    "PDF File ID": "1Cqjliv9yqu9KFxTJye-LuPwVyFmlsLAb"
+  },
+  {
+    "Topic": "Day 3",
+    "Content": "Incident Investigations and RCA Fundamentals\n\n• Goal: Understand the mechanics of safety investigations and Root Cause Analysis (RCA) methods without becoming an investigator.\n\n• Key Topics:\n- Investigation Mindset: Prioritizing prevention over blame and evidence over assumptions. \n- Evidence Collection: Evaluating narratives, photos, video/audio, system logs, and witness \nstatements.\n\n• RCA Methodologies:\n- Five Whys: Tracing linear chains to system conditions.\n- Multi-Threaded Five Whys: Managing parallel causal pathways (e.g., equipment, people, \nenvironment, management systems).\n- Fishbone Analysis: Categorizing factors across People, Process, Equipment, Environment, \nMaterials, and Management.\n\n• CAPA Linkage:\n- Tying corrective/preventive actions directly back to root causes and scoring them on impact, effort, \nand confidence.",
+    "Article ID": "HAV-KB0138",
+    "Last Updated": "7/24/2026 16:55",
+    "PDF File ID": "1-POcvfxm7XkDThsT_YqAPmQ4ImtHUluU"
+  },
+  {
+    "Topic": "Day 4",
+    "Content": "Case Management\n\n• Goal: Learn how to manage incidents and organize investigation evidence.\n• Key Topics:\n- Creating and managing cases.\n- Evidence management.\n- Investigation workspace.\n- Collaboration features.",
+    "Article ID": "HAV-KB0139",
+    "Last Updated": "7/27/2026 20:47",
+    "PDF File ID": "16eGAi-hJMy7Vi_m_IP6HDxsIMEEYKqsM/"
+  },
+  {
+    "Topic": "Day 5",
+    "Content": "Roles\n\n• Goal: Understand user permissions and responsibilities within Haven.\n\n• Key Topics:\n- User roles.\n- Permissions.\n- Access control.\n- Team responsibilities.",
+    "Article ID": "HAV-KB0140",
+    "Last Updated": "7/27/2026 20:48",
+    "PDF File ID": "1Iz2Xg8ENdTqtUyK9i_IxLvsXmprdVCZC"
+  },
+  {
+    "Topic": "Day 6",
+    "Content": "Auto Collected Evidence & Context\n\n• Goal: Learn how Haven automatically gathers supporting information for investigations.\n\n• Key Topics:\n- Regulatory data.\n- Weather information.\n- Company programs.\n- Witness statements.",
+    "Article ID": "HAV-KB0141",
+    "Last Updated": "7/27/2026 20:48",
+    "PDF File ID": "1yiNQLWSDnoAZc5B-f8I7pWOU6eHZkQEJ"
+  },
+  {
+    "Topic": "Day 7",
+    "Content": "Incident Timeline\n\n• Goal: Build and review a chronological sequence of investigation events.\n\n• Key Topics:\n- Timeline generation.\n- Evidence ordering.\n- Event relationships.\n- Investigation review.",
+    "Article ID": "HAV-KB0142",
+    "Last Updated": "7/27/2026 20:49",
+    "PDF File ID": "1Tph6Vky5jvd3s6IvqJVzYMFPktxjLNRi"
+  },
+  {
+    "Topic": "Day 8",
+    "Content": "Root Cause Analysis (RCA)\n• Goal: Identify the underlying causes of incidents using Haven's RCA tools.\n\n• Key Topics:\n- RCA concepts.\n- Analysis methods.\n- Contributing factors.\n- Findings.",
+    "Article ID": "HAV-KB0143",
+    "Last Updated": "7/27/2026 20:49",
+    "PDF File ID": "1szVe99V_2V2L9Fs1SGA9XG3IYwQcS3mf"
+  },
+  {
+    "Topic": "Day 10",
+    "Content": "Practical Lab – End-to-End Investigation\n\n• Goal: Apply the complete Haven investigation workflow by creating and investigating a real incident from start to finish using the live platform.\n\n• Key Topics:\n- Create a new incident by entering incident details, location, and reviewing the submission before creating the case.\n- Upload multiple evidence files, verify document types, and understand Haven's automatic document processing (OCR and PDF conversion).\n- Retrieve regulatory information and historical weather data using Auto Collected Evidence & Context.\n- Add and manage witness statements using the available invitation methods (Magic Link, Voice Call, or SMS).\n- Complete the investigation by building the timeline, performing Root Cause Analysis (RCA), reviewing findings, and validating the end-to-end investigation workflow.",
+    "Article ID": "HAV-KB0144",
+    "Last Updated": "7/27/2026 20:46",
+    "PDF File ID": "1G8vIC8XCsVPz51e49Oca_NDiGSQhkra0"
+  },
+  {
+    "Topic": "Day 12",
+    "Content": "Helpdesk Operational Process Guide\n\n• Goal: Understand the Haven × Santos helpdesk operating model, including core support processes, SLA expectations, escalation paths, and performance metrics to consistently deliver high-quality customer support.\n\nKey Topics:\n- Core Support Processes: Learn the end-to-end responsibilities of the helpdesk, including Issue Response, Application Support, Escalation Management, Knowledge Management, SLA Monitoring, and Change & Release Communication. Understand each \nprocess's purpose, triggers, expected actions, and ownership.\n- Issue Response & Escalation: Handle critical incidents by acknowledging issues within SLA, creating high-priority tickets, notifying stakeholders, and escalating unresolved problems through Level 1, Level 2, and Level 3 support (Jaskiran/Joe) when \nnecessary.\n- Application Support & Knowledge Management: Support users with application navigation, permissions, troubleshooting, and leverage the Knowledge Base to resolve issues efficiently. Document new solutions and recurring issues to continuously improve \nsupport resources.\n- SLA Management: Understand ticket priority levels (P1–P4), response time targets, escalation paths, notification requirements, and review cadence to ensure incidents are handled according to service commitments.\n- Performance Metrics & KPIs: Monitor operational success through key metrics including Tickets Closed, SLA Compliance Rate, Backlog Count, First Contact Resolution (FCR), Reopened Ticket Rate, Escalation Rate, Customer Satisfaction (CSAT), and \nKnowledge Base Usage.\n- Continuous Improvement Mindset: Use ticket reports, SLA monitoring, customer feedback, and Knowledge Base updates to improve resolution speed, maintain service quality, and enhance the overall support experience.",
+    "Article ID": "HAV-KB0145",
+    "Last Updated": "7/28/2026 15:37",
+    "PDF File ID": "1S4gxkwUz-zC7a2H1KWKYQcK9DHBXS0IF"
+  },
+  {
+    "Topic": "Day 13",
+    "Content": "Regeneration Scenarios & Practice\n\n• Goal: Understand how Haven's regeneration system works, what triggers regeneration, how changes cascade through the investigation workflow, and how to guide users in safely regenerating and accepting updated analyses while preserving existing work.\n\n• Key Topics:\n- Regeneration Fundamentals: Haven detects upstream changes (evidence, timeline, or RCA) and flags downstream stages that require regeneration. Users control when regeneration occurs, and accepted work is never automatically overwritten.\n- Regeneration Triggers: Learn the events that trigger regeneration, including adding, deleting, or editing evidence files, resolving Timeline conflicts, editing or adding RCA causes, and re-accepting regenerated RCA analyses.\n- Scenario A – New Evidence Uploaded: Practice uploading new evidence after a Timeline and RCA have been accepted, regenerating the Timeline, reviewing updates, re-accepting it, and then regenerating the affected RCA.\n- Scenario B – RCA Changes: Learn how editing or manually adding a cause in Fishbone RCA automatically triggers regeneration for Corrective Actions, ensuring recommendations reflect the latest root causes.\n- Scenario C – Evidence Deletion Cascade: Understand the complete regeneration flow when evidence is deleted: Evidence → Timeline → RCA → Corrective Actions, with each stage regenerated and accepted in sequence.\n- Scenario D – RCA Cause Deletion: Practice deleting a Fishbone cause, re-accepting the RCA, and regenerating Corrective Actions to reflect updated recommendations without losing previously accepted work.\n- Support Best Practices: Reinforce the key helpdesk message that regeneration is expected behavior, not an error. Guide users to regenerate stages in order, review the results, and reassure them that accepted work is preserved until they choose to \nregenerate.",
+    "Article ID": "HAV-KB0146",
+    "Last Updated": "7/28/2026 15:31",
+    "PDF File ID": "1BgPZOoiYAtKrtimetqQWtiXca2GFrdag"
+  },
+  {
+    "Topic": "Update Sign-In Email",
+    "Content": "A user's sign-in email may need to be updated due to an account migration, company email change, or domain change. \n\nProcess: \n1. Verify the current sign-in email and the new sign-in email requested by the customer. \n2. Confirm the reason for the email change (e.g., account migration, company email update). \n3. Inform the customer that updating a user's sign-in email requires escalation to the appropriate team. \n\nCreate an internal escalation with the following details: \n1. Current sign-in email \n2. New sign-in email \n3. Reason for the change \n4. User's organization (if provided) \n\nKeep the customer informed of the progress and provide updates once the request has been completed. \n\n\"Thank you for reaching out. Updating a user's sign-in email requires assistance from our internal team. I'll escalate your request to update the sign-in email from [current email] to [new email] and keep you updated on the progress.\" \n\nNotes \n*Level 1 Helpdesk cannot update a user's sign-in email. \n*Ensure both the current and requested email addresses are included in the escalation to avoid delays. \n*If the request is related to an account migration, mention this in the escalation for additional context.",
+    "Article ID": "HAV-KB0147",
+    "Last Updated": "7/29/2026 17:43",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "Update User's Role / Business Unit (BU)",
+    "Content": "Process:\n1. Requests to update a user's role or Business Unit (BU) are managed by the customer's Haven Administrator.\n2. Advise the user to contact their organization's administrator to request the necessary changes.\n\nNotes:\n*Level 1 Support does not modify user roles or BU assignments.\n*If the customer is unsure who their Haven Administrator is, advise them to check internally within their organization.\n\n\"Thank you for reaching out. User role and Business Unit (BU) assignments are managed by your organization's Haven Administrator. Please contact your administrator to request the necessary updates to the user's role and/or BU assignment.\n\nIf you have any other questions, please let us know.'",
+    "Article ID": "HAV-KB0148",
+    "Last Updated": "7/29/2026 17:50",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "New User / Sign-In Email Update",
+    "Content": "Process:\n1. Verify the user's current email address and the requested new sign-in email (if applicable).\n2. Confirm the reason for the request (e.g., account migration, company email change, or new user creation).\n3. Inform the customer that the request requires assistance from the Haven Team.\n4. Escalate the request with the following details:\n* User's current email (if applicable)\n* Requested new email\n* User's full name\n* Organization name\n* Reason for the request\n5. Keep the customer informed and provide updates once the Haven Team responds.\n\nNotes:\n*New user creation and sign-in email updates are handled by the Haven Team.\n*Level 1 Support cannot create new users or update sign-in email addresses.\n*Ensure all required user details are included in the escalation to avoid delays.\n\n\"Thank you for reaching out. Requests for new user creation or sign-in email updates require assistance from the Haven Team. I'll escalate your request to the appropriate team and keep you updated on its progress.\n\nPlease let us know if you have any other questions in the meantime.",
+    "Article ID": "HAV-KB0149",
+    "Last Updated": "7/29/2026 17:50",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "User Sees Nothing After Login",
+    "Content": "Possible Cause:\nThe account is newly created and no access scope has been assigned yet.\nThe user's SSO account has not yet been mapped to the correct Haven profile.\n\nProcess\n1. Confirm whether this is the user's first time logging in.\n2. Ask the user if they can successfully log in but are unable to view any incidents or data.\n3. If the account is new, advise the user to contact their organization's Haven Administrator or implementation contact to verify that the appropriate role and access scope have been assigned.\n4. If the administrator confirms that the user has already been assigned the correct scope but the issue persists, escalate the ticket to the Haven Team for further investigation.\n\nNotes:\n*User visibility in Haven depends on the role and access scope assigned by the organization's administrator.\n*A newly created account without the appropriate scope may successfully log in but display no incidents or data.\n*Escalate only after confirming that the correct scope has already been assigned and the issue still persists.\n\n\"Thank you for confirming. Since this is your first time logging in, please contact your organization's Haven Administrator to verify that your account has been assigned the appropriate role and access scope. If your administrator confirms that everything has been configured correctly and you're still unable to view any data, please let us know, and we'll be happy to investigate further.",
+    "Article ID": "HAV-KB0150",
+    "Last Updated": "7/29/2026 17:51",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "A whole BU / division is\nmissing for me.",
+    "Content": "Possible Cause: \nThe user's access scope does not include the Business Unit (BU) or division they are trying to access. \n\nProcess: \n1. Confirm which Business Units or divisions the user can currently see. \n2. Verify which BU or division they believe is missing. \n3. Advise the user to contact their organization's Haven Administrator to request the necessary access update. \n4. If the administrator confirms the correct access has already been assigned and the issue persists, gather the details and escalate to the Haven Team if appropriate. \n\nNotes: \n*Access to Business Units and divisions is managed by the customer's Haven Administrator. \n*Level 1 Support does not grant or modify user access. \n*Ensure the user specifies the missing BU or division before directing them to their administrator. \n\n\"Thank you for reaching out. Could you please let us know which Business Unit or division you're currently able to access, and which one you're expecting to see? \n\nIf the missing BU or division hasn't been assigned to your account, you'll need to contact your organization's Haven Administrator, as they manage user access and permissions. If your administrator confirms the correct access has already been assigned and you're still unable to see it, please let us know and we'll be happy to investigate further.",
+    "Article ID": "HAV-KB0151",
+    "Last Updated": "7/29/2026 17:52",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "My Colleague Sees an Incident I Can't",
+    "Content": "Process: \nConfirm which incident the user is unable to view. \nAsk whether another user can access the incident and, if so, what their role is (if known). \nExplain that incident visibility depends on each user's assigned role and access scope. \nIf the customer confirms the user should have access to the incident, advise them to contact their organization's Haven Administrator to review and update the user's access. \n\nNotes: \n*Users may have different visibility based on their assigned role, Business Unit (BU), and division. \n*Level 1 Support does not modify user access or permissions. \n*If the administrator confirms the user has the correct access and the issue persists, gather the details and escalate to the Haven Team if necessary. \n\n'Thank you for reaching out. Incident visibility is based on each user's assigned role and access scope. If another user can view the incident but you cannot, it's possible that your account doesn't currently have access to the Business Unit or division where the incident resides. \n\nIf you believe you should have access, please contact your organization's Haven Administrator to review your permissions. If they confirm your access is configured correctly and you're still unable to view the incident, please let us know and we'll be happy to investigate further.",
+    "Article ID": "HAV-KB0152",
+    "Last Updated": "7/29/2026 17:54",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "The BU/DIV filter doesn't\nshow the unit I need.",
+    "Content": "Possible Cause \nThe filter only displays Business Units (BUs) and divisions that the user already has access to. \nA missing BU or division in the filter typically indicates an access scope issue, not a filter issue. \n\nProcess: \n1. Confirm which BU or division the user is expecting to see in the filter. \n2. Explain that filters only display the BUs and divisions the user is authorized to access. \n3. Clarify the difference between: \nFilter – A temporary, user-selected view of accessible data. \nAccess Scope – Permissions assigned by the organization's Haven Administrator. \n4. If the user should have access to the missing BU or division, advise them to contact their organization's Haven Administrator to review and update their access. \n\nNotes: \n*A missing BU or division in the filter is not typically a product bug. \n*Level 1 Support does not modify user access or permissions. \n*If the administrator confirms the user's access is correct and the BU/division is still missing from the filter, gather the details and escalate to the Haven Team if appropriate. \n\n\"Thank you for reaching out. The BU/Division filter only displays the Business Units and divisions that your account has permission to access. If the unit you're looking for isn't listed, it may indicate that your current access scope doesn't include it. \n\nIf you believe you should have access, please contact your organization's Haven Administrator to review your permissions. If they confirm your access is configured correctly and the issue persists, please let us know and we'll be happy to investigate further.",
+    "Article ID": "HAV-KB0153",
+    "Last Updated": "7/29/2026 17:56",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "Totals differ between two \nusers.",
+    "Content": "Possible Cause \nDashboard totals and incident counts are based on each user's assigned access scope. \nDifferent users may see different totals if they have different roles or access permissions. \n\nProcess: \n1. Confirm which dashboard, report, or list the users are comparing. \n2. Explain that totals are calculated based on the data each user is authorized to view. \n3. If the customer believes both users have identical roles and access scope, gather the following: \nNames or email addresses of both users \nScreenshots showing the differing totals \nThe dashboard, report, or page where the discrepancy occurs \n4. If the customer confirms both users should have identical access, escalate the issue with the collected information. \n\nNotes: \n*Different totals are expected behavior when users have different access scopes. \n*Level 1 Support should only escalate after confirming (or if the customer insists) that both users have identical roles and permissions. \n*Include screenshots and both user accounts in the escalation to assist with the investigation. \n\n\"Thank you for reaching out. Dashboard totals and incident counts are based on each user's assigned access scope, so it's expected for different users to see different totals if their permissions differ. \n\nIf you believe both users have the same role and access, could you please provide the names or email addresses of both users along with screenshots of the differing totals? We'll be happy to investigate further.",
+    "Article ID": "HAV-KB0154",
+    "Last Updated": "7/29/2026 17:58",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "Three layers decide what a user sees and does",
+    "Content": "Overview \n\nA user's visibility and permissions in Haven are determined by three layers: \n\nFilter (User-set, temporary) – Controls how data is displayed but does not change what the user has permission to view. \nAccess Scope (Admin-set) – Determines which organizations, Business Units (BUs), and divisions the user can access. \nRole (Admin-set) – Determines what actions the user can perform (e.g., Manager vs. Investigator) and whether they can view only their own incidents or all incidents within their assigned scope. \n\nProcess: \n1. Identify whether the issue is related to: \nA filter (display preference), \nAn access scope (organization/BU/division visibility), or \nA role (permissions and actions). \n2. If the issue involves access scope or role, advise the user to contact their organization's Haven Administrator. \n3. Escalate only if the administrator confirms the configuration is correct and the issue persists. \n\nNotes; \n*Filters are temporary and controlled by the user. \n*Access scopes and roles are assigned by the customer's Haven Administrator. \n*Level 1 Support does not modify user roles or access scopes. \n*Requests to change roles or access should be routed to the customer's Haven Administrator. \n\n\"Thank you for reaching out. User access in Haven is determined by three factors: your selected filters, your assigned access scope (Organization/BU/Division), and your user role. If your request involves changing your role or access scope, please contact your organization's Haven Administrator, as these permissions are managed by them. If your administrator confirms everything is configured correctly and the issue persists, please let us know and we'll be happy to investigate further.",
+    "Article ID": "HAV-KB0155",
+    "Last Updated": "7/29/2026 18:01",
+    "PDF File ID": "1nJsTib4kBg4-__1kw2PMDkI1G4U3bOF0"
+  },
+  {
+    "Topic": "Unable to Upload Excel",
+    "Content": "Possible Cause: \nExcel (.xls / .xlsx) files are not a supported evidence upload format. \n\nProcess: \n1. Confirm that the user is attempting to upload an Excel file. \n2. Explain that Excel files are not currently supported for evidence uploads. \n3. Ask the user to convert the Excel file to a supported format, such as: \nPDF (recommended) \nText (if applicable) \n4. Have the user upload the converted file instead. \n\nNotes: \nSupported upload formats are PDF, Word, PowerPoint, text, image, and video. \nWord and PowerPoint files are automatically converted to PDF during processing. \nExcel files are not supported for evidence upload. \n\n\"Thank you for reaching out. At this time, Excel (.xls / .xlsx) files aren't supported for evidence uploads in Haven. \n\nWe recommend converting the spreadsheet to a PDF before uploading it. Once converted, please try uploading the PDF version. If you continue to experience issues with a supported file type, let us know and we'll be happy to investigate further.",
+    "Article ID": "HAV-KB0156",
+    "Last Updated": "7/30/2026 16:52",
+    "PDF File ID": "1eXp-sv4A4ShwminfvXK3Exr93ejw7I04"
+  }
+]
